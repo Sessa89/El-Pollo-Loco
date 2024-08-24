@@ -12,8 +12,6 @@ class Cloud extends MoveableObject {
 
     // alle 60 Bilder pro Sekunde wird die x-Koordinate um 0.15 Pixel verringert
     animate() {
-        setInterval( () => {
-            this.x -= 0.15;
-        }, 1000 / 60);          // 60 fps
+        this.moveLeft();
     }
 }
