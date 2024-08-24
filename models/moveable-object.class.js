@@ -21,7 +21,7 @@ class MoveableObject {
         arr.forEach((path) => {                 // Für jedes Element innerhalb des Arrays wird die Schleife ausgeführt (hier: 6x)
             let img = new Image();              // Variable "img" wird mit neuem Bild angelegt
             img.src = path;                     // Bild wird in das Image-Object geladen hinein, Bild kann somit in das Canvas eingefügt werden
-            this.imageCache[path] = path;       // imageCache wird geupdated
+            this.imageCache[path] = img;       // imageCache wird geupdated
         });
 
     }
