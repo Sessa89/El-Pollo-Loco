@@ -7,6 +7,7 @@ class MoveableObject {
     imageCache = [];
     currentImage = 0;
     speed = 0.15;
+    otherDirection = false;
 
     // loadImage('img/test.png')
     loadImage(path) {
@@ -25,7 +26,6 @@ class MoveableObject {
             img.src = path;                     // Bild wird in das Image-Object geladen hinein, Bild kann somit in das Canvas eingefügt werden
             this.imageCache[path] = img;       // imageCache wird geupdated
         });
-
     }
 
     moveRight() {
