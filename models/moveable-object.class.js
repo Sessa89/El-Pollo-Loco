@@ -28,12 +28,20 @@ class MoveableObject {
         });
     }
 
+    playAnimation(images) {
+        let i = this.currentImage % this.IMAGES_WALKING.length; // "%" = Modulo-Operator = Rest; let i = 0 % 6; => 0, Rest 0
+        // i = 0, 1, 2, 3, 4, 5, 0
+        let path = images[i];      // Beim ersten Durchlauf: currentImage = 0
+        this.img = this.imageCache[path];       // 0. Bild wird geladen
+        this.currentImage++;                    // currentImage wird erhöht => beim nächsten Durchlauf startet Intervall mit currentImage = 1
+    }
+
     moveRight() {
         console.log('Moving right');
     }
 
     moveLeft() {
-        setInterval( () => {
+        setInterval(() => {
             this.x -= this.speed;
         }, 1000 / 60);          // 60 fps
     }

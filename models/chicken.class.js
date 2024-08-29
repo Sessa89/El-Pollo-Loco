@@ -1,5 +1,4 @@
 class Chicken extends MoveableObject {
-    
     y = 370;
     height = 50;
     width = 50;
@@ -23,11 +22,7 @@ class Chicken extends MoveableObject {
         this.moveLeft();
 
         setInterval(() => {
-            let i = this.currentImage % this.IMAGES_WALKING.length; // "%" = Modulo-Operator = Rest; let i = 0 % 6; => 0, Rest 0
-            // i = 0, 1, 2, 3, 4, 5, 0
-            let path = this.IMAGES_WALKING[i];      // Beim ersten Durchlauf: currentImage = 0
-            this.img = this.imageCache[path];       // 0. Bild wird geladen
-            this.currentImage++;                    // currentImage wird erhöht => beim nächsten Durchlauf startet Intervall mit currentImage = 1
+            this.playAnimation(this.IMAGES_WALKING);
         }, 100);
     }
 }
