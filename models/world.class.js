@@ -51,7 +51,8 @@ class World {
             this.flipImage(mo);
         }
 
-        this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);    // Bild wird eingefügt (nicht gespiegelt / gespiegelt)
+        mo.draw(this.ctx);
+        mo.drawFrame(this.ctx);        
 
         if (mo.otherDirection) {    // Einstellungen des Contexts werden resettet bzw. rückgängig gemacht damit nachfolgende Bilder nicht gespiegelt eingefügt werden
             this.flipImageBack(mo);
