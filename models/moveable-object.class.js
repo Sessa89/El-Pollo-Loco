@@ -1,4 +1,4 @@
-class MoveableObject extends DrawableObject {  
+class MoveableObject extends DrawableObject {
     speed = 0.15;
     otherDirection = false;
     speedY = 0;
@@ -16,16 +16,20 @@ class MoveableObject extends DrawableObject {
     }
 
     isAboveGround() {
-        return this.y < 140;
+        if (this instanceof ThrowableObject) {      // Throwable object should always fall
+            return true;
+        } else {
+            return this.y < 140;
+        }
     }
 
     // character.isColliding(chicken);
     isColliding(mo) {
-        return  (this.x + this.width) >= mo.x && 
-                (this.y + this.height) >= mo.y &&
-                this.x <= mo.x &&
-                this.y <= (mo.y + mo.height); 
-         
+        return (this.x + this.width) >= mo.x &&
+            (this.y + this.height) >= mo.y &&
+            this.x <= mo.x &&
+            this.y <= (mo.y + mo.height);
+
         /*
         // Bessere Formel zur Kollisionsberechnung (Genauer)
         return  (this.x + this.width) >= mo.x && this.x <= (mo.x + mo.width) && 
