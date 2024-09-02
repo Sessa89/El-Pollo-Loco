@@ -1,9 +1,27 @@
 body {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-image: url('./img/0_sonstiges/desert_2.png');
+    background-position: center;
+    font-family: 'zabars', Arial, Helvetica, sans-serif;
+}
+
+@font-face {
+    font-family: 'zabars';
+    src: url('./fonts/zabars.ttf') format('truetype');
+}
+
+h1 {
+    font-size: 64px;
+    letter-spacing: 3px;
+    text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
 }
 
 canvas {
     background-color: black;
+    border: 8px solid rgba(0, 0, 0, 0);
 }
