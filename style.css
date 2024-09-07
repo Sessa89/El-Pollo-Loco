@@ -27,6 +27,13 @@ canvas {
     display: block;
 }
 
+.fullscreen-img {
+    height: 40px;
+    width: 40px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
 @media only screen and (max-width: 720px) {
     canvas {
         width: 100%;
