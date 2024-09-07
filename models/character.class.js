@@ -50,41 +50,61 @@ class Character extends MoveableObject {
     }
 
     animate() {
-        setInterval(() => {
-            this.walking_sound.pause();
-            if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
-                this.moveRight();
-                this.otherDirection = false;
-                this.walking_sound.play();
-            }
+        setInterval(() => this.moveCharacter(), 1000 / 60);
+        setInterval(() => this.playCharacterAnimation(), 100);
+    }
 
-            if (this.world.keyboard.LEFT && this.x > 0) {
-                this.moveLeft();
-                this.otherDirection = true;
-                this.walking_sound.play();
-            }
+    moveCharacter() {
+        this.walking_sound.pause();
+        if (this.canMoveRight())
+            this.moveRight();
 
-            if (this.world.keyboard.SPACE && !this.isAboveGround()) {      // "&& !this.isAboveGround()" entfernen, wenn man fliegen oder schwimmen möchte
-                this.jump();
-            }
+        if (this.canMoveLeft())
+            this.moveLeft();
 
-            this.world.camera_x = -this.x + 100;
-        }, 1000 / 60);
+        if (this.canJump())
+            this.jump();
 
-        setInterval(() => {
-            if (this.isDead()) {
-                this.playAnimation(this.IMAGES_DEAD);
-            } else if (this.isHurt()) {
-                this.playAnimation(this.IMAGES_HURT);
-            } else if (this.isAboveGround()) {
-                // Jump animation
-                this.playAnimation(this.IMAGES_JUMPING);
-            } else {
-                if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-                    // Walk animation
-                    this.playAnimation(this.IMAGES_WALKING);
-                }
+        this.world.camera_x = -this.x + 100;
+    }
+
+    canMoveRight() {
+        return this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x;
+    }
+
+    moveRight() {
+        super.moveRight();
+        this.otherDirection = false;
+        this.walking_sound.play();
+    }
+
+    canMoveLeft() {
+        return this.world.keyboard.LEFT && this.x > 0;
+    }
+
+    moveLeft() {
+        super.moveLeft();
+        this.otherDirection = true;
+        this.walking_sound.play();
+    }
+
+    canJump() {     // "&& !this.isAboveGround()" entfernen, wenn man fliegen oder schwimmen möchte
+        return this.world.keyboard.SPACE && !this.isAboveGround();
+    }
+
+    playCharacterAnimation() {
+        if (this.isDead()) {
+            this.playAnimation(this.IMAGES_DEAD);
+        } else if (this.isHurt()) {
+            this.playAnimation(this.IMAGES_HURT);
+        } else if (this.isAboveGround()) {
+            // Jump animation
+            this.playAnimation(this.IMAGES_JUMPING);
+        } else {
+            if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+                // Walk animation
+                this.playAnimation(this.IMAGES_WALKING);
             }
-        }, 100);
+        }
     }
 }
