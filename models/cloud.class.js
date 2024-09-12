@@ -6,7 +6,7 @@ class Cloud extends MoveableObject {
     constructor() {
         super().loadImage('./img/5_background/layers/4_clouds/1.png');
 
-        this.x = Math.random() * 500;   // Zahl zwischen 0 und 500 => "Math.random()" gibt eine Zahl zwischen "0" und "1" aus
+        this.x = Math.random() * 2200;   // Zahl zwischen 0 und 2200 => "Math.random()" gibt eine Zahl zwischen "0" und "1" aus        
         this.animate();
     }
 
