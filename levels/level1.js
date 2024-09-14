@@ -16,7 +16,7 @@ const mapPositions = [-719, 0, 719, 719 * 2, 719 * 3];
 
 const level1 = new Level(
     [...createEnemies(5, 5)],
-    [...createFirstBackgroundObject(4)],
+    [...createBackgroundObjects(4)],
     [...createMaps([map1, map2], mapPositions)]
 );
 
@@ -30,31 +30,32 @@ function createEnemies(firstEnemyCount, secondEnemyCount) {
     for (let i = 0; i < secondEnemyCount; i++) {
         enemies.push(new ChickenSmall());
     }
+
     enemies.push(new Endboss());
 
     return enemies;
 }
 
-function createFirstBackgroundObject(number) {
-    let firstBackgroundObject = [];
+function createBackgroundObjects(firstBackgroundObjectCount) {
+    let backgroundObjects = [];
     
-    for (let i = 0; i < number; i++) {
-        firstBackgroundObject.push(new Cloud());
+    for (let i = 0; i < firstBackgroundObjectCount; i++) {
+        backgroundObjects.push(new Cloud());
     }
     
-    return firstBackgroundObject;
+    return backgroundObjects;
 }
 
 function createMaps(mapGroup, mapPositions) {
-    let backgroundObjects = [];
+    let maps = [];
     
     for (let i = 0; i < mapPositions.length; i++) {
         let currentMap = mapGroup[i % mapGroup.length];
         
         for (let j = 0; j < currentMap.length; j++) {
-            backgroundObjects.push(new BackgroundObject(currentMap[j], mapPositions[i]));
+            maps.push(new BackgroundObject(currentMap[j], mapPositions[i]));
         }
     }
     
-    return backgroundObjects;
+    return maps;
 }
