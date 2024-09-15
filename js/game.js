@@ -1,10 +1,19 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+const sfx = {
+    background_sound: Object.assign(document.createElement('Audio'), {
+        src: ['../audio/music.mp3'],
+        loop: true,
+        volume: 0.6
+    })
+}
+let backgroundSoundOn;
 
 function init() {
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
+    playBackgroundMusic();
 
     console.log('My Character is', world['character']);         // Alternative Schreibweise "world.character"    
 }
@@ -81,5 +90,29 @@ function exitFullscreen() {
         document.exitFullscreen();
     } else if (document.webkitExitFullscreen) {
         document.webkitExitFullscreen();
+    }
+}
+
+function playBackgroundMusic() {
+    backgroundSoundOn = true;
+    sfx.background_sound.play();
+}
+
+function pauseBackgroundMusic() {
+    backgroundSoundOn = false;
+    sfx.background_sound.pause();
+    document.getElementById('speaker').src = ['./img/0_sonstiges/app img_volume-xmark.svg'];
+}
+
+function isBackgroundMusicOn() {
+    return backgroundSoundOn === true;
+}
+
+function toggleBackgroundMusic() {
+    if (isBackgroundMusicOn()) {
+        pauseBackgroundMusic();
+    } else {
+        playBackgroundMusic();
+        document.getElementById('speaker').src = ['./img/0_sonstiges/app img_volume-high.svg'];
     }
 }
