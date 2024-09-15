@@ -3,17 +3,16 @@ let world;
 let keyboard = new Keyboard();
 const sfx = {
     background_sound: Object.assign(document.createElement('Audio'), {
-        src: ['../audio/music.mp3'],
+        src: '../audio/music.mp3',
         loop: true,
         volume: 0.6
     })
 }
-let backgroundSoundOn;
+let backgroundSoundOn = false;
 
 function init() {
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
-    playBackgroundMusic();
 
     console.log('My Character is', world['character']);         // Alternative Schreibweise "world.character"    
 }
@@ -96,16 +95,17 @@ function exitFullscreen() {
 function playBackgroundMusic() {
     backgroundSoundOn = true;
     sfx.background_sound.play();
+    document.getElementById('speaker').src = './img/0_sonstiges/app img_volume-high.svg';
 }
 
 function pauseBackgroundMusic() {
     backgroundSoundOn = false;
     sfx.background_sound.pause();
-    document.getElementById('speaker').src = ['./img/0_sonstiges/app img_volume-xmark.svg'];
+    document.getElementById('speaker').src = './img/0_sonstiges/app img_volume-xmark.svg';
 }
 
 function isBackgroundMusicOn() {
-    return backgroundSoundOn === true;
+    return backgroundSoundOn;
 }
 
 function toggleBackgroundMusic() {
@@ -113,6 +113,5 @@ function toggleBackgroundMusic() {
         pauseBackgroundMusic();
     } else {
         playBackgroundMusic();
-        document.getElementById('speaker').src = ['./img/0_sonstiges/app img_volume-high.svg'];
     }
 }
