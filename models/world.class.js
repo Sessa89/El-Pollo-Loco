@@ -5,10 +5,10 @@ class World {
     ctx;
     keyboard;
     camera_x = 0;
-    statusBarHealth = new StatusBar('health');
-    statusBarCoin = new StatusBar('coin');
-    statusBarBottle = new StatusBar('bottle');
 
+    healthBar = new HealthBar();
+    collectableObjectBar = new CollectableObjectBar();
+    throwableObjectBar = new ThrowableObjectBar();
 
     throwableObjects = [];
 
@@ -16,9 +16,7 @@ class World {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
-        this.statusBarHealth.y = 0;
-        this.statusBarCoin.y = 25;
-        this.statusBarBottle.y = 50;
+        
         this.draw();
         this.setWorld();
         this.run();
@@ -46,7 +44,7 @@ class World {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
                 this.character.hit();
-                this.statusBarHealth.setPercentage(this.character.energy);
+                this.healthBar.setPercentage(this.character.energy);
             }
         })
     }
@@ -59,9 +57,10 @@ class World {
 
         this.ctx.translate(-this.camera_x, 0);   // Kamera zurückschieben
         // ----- Space for fixed objects -----
-        this.addToMap(this.statusBarHealth);
-        this.addToMap(this.statusBarCoin);
-        this.addToMap(this.statusBarBottle);
+        this.addToMap(this.healthBar);
+        this.addToMap(this.collectableObjectBar);
+        this.addToMap(this.throwableObjectBar);
+
         this.ctx.translate(this.camera_x, 0);   // Kamera vorschieben
 
         this.addToMap(this.character);
