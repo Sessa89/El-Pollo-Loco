@@ -1,14 +1,14 @@
 class Bottle extends CollectableObject {
-    
+    y = 350;
+
     IMAGES = [
         './img/6_salsa_bottle/1_salsa_bottle_on_ground.png',
         './img/6_salsa_bottle/2_salsa_bottle_on_ground.png'
     ];
     
-    constructor(x, y) {
+    constructor(x) {
         super();
-        this.x = x;
-        this.y = y;
+        this.x = 350 + Math.random() * 1500;     // Zahl zwischen 350 und 1850 => "Math.random()" gibt eine Zahl zwischen "0" und "1" aus
         this.loadImage('./img/6_salsa_bottle/1_salsa_bottle_on_ground.png'); // Bilder müssen noch ständig gewechselt werden
     }
 

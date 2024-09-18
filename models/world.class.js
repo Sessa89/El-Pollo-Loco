@@ -13,7 +13,7 @@ class World {
     throwableObjects = [];
 
     coin = new Coin(100, 200);
-    bottle = new Bottle(200, 150);
+    bottle = new Bottle();
 
     constructor(canvas) {
         this.ctx = canvas.getContext('2d');
