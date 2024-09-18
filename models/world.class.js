@@ -12,6 +12,9 @@ class World {
 
     throwableObjects = [];
 
+    coin = new Coin(100, 200);
+    bottle = new Bottle(200, 150);
+
     constructor(canvas) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
@@ -67,6 +70,9 @@ class World {
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.throwableObjects);
+
+        this.addToMap(this.bottle);
+        this.addToMap(this.coin);
 
         this.ctx.translate(-this.camera_x, 0);
 
