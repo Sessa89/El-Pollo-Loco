@@ -1,4 +1,7 @@
 class Coin extends CollectableObject {
+    height = 125;
+    width = 125;
+
     constructor(x, y) {
         super();
         this.x = x;

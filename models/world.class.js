@@ -49,7 +49,14 @@ class World {
                 this.character.hit();
                 this.healthBar.setPercentage(this.character.energy);
             }
-        })
+        });
+
+        this.level.collectableObjects.forEach((collectableObject, index) => {
+            if (this.character.isColliding(collectableObject)) {
+                collectableObject.collect(this.character);
+                this.level.collectableObjects.splice(index, 1);
+            }
+        });
     }
 
     draw() {
@@ -70,9 +77,10 @@ class World {
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.throwableObjects);
+        this.addObjectsToMap(this.level.collectableObjects);
 
-        this.addToMap(this.bottle);
-        this.addToMap(this.coin);
+        // this.addToMap(this.bottle);
+        // this.addToMap(this.coin);
 
         this.ctx.translate(-this.camera_x, 0);
 

@@ -17,7 +17,8 @@ const mapPositions = [-719, 0, 719, 719 * 2, 719 * 3];
 const level1 = new Level(
     [...createEnemies(5, 5)],
     [...createBackgroundObjects(4)],
-    [...createMaps([map1, map2], mapPositions)]
+    [...createMaps([map1, map2], mapPositions)],
+    [...createCollectableObjects(10)]
 );
 
 function createEnemies(firstEnemyCount, secondEnemyCount) {
@@ -58,4 +59,18 @@ function createMaps(mapGroup, mapPositions) {
     }
     
     return maps;
+}
+
+function createCollectableObjects(firstCollectableObjectCount) {
+    let collectables = [];
+
+    for (let i = 0; i < firstCollectableObjectCount; i++) {
+        collectables.push(new Bottle());
+    }
+
+    collectables.push(new Coin(300, 100));
+    collectables.push(new Coin(500, 150));
+    collectables.push(new Coin(800, 200));
+
+    return collectables;
 }

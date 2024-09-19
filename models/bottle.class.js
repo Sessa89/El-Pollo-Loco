@@ -1,5 +1,7 @@
 class Bottle extends CollectableObject {
     y = 350;
+    height = 75;
+    width = 75;
 
     IMAGES = [
         './img/6_salsa_bottle/1_salsa_bottle_on_ground.png',
