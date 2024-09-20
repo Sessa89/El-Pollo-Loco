@@ -19,7 +19,10 @@ class Bottle extends CollectableObject {
     // Überschreibt die onCollect Methode, um Flaschen zur Anzahl der Wurfobjekte hinzuzufügen.
     onCollect() {
         super.onCollect();
-        world.character.bottles += 1;  // Füge eine Flasche hinzu, wenn sie gesammelt wird
-        console.log('Bottle collected! Bottles: ' + world.character.bottles);
+
+        let newPercentage = Math.min(world.throwableObjectBar.percentage + 10, 100);
+        world.throwableObjectBar.setPercentage(newPercentage);
+
+        console.log('Bottle collected! Bottles: ' + ((world.throwableObjectBar.percentage) / 10));
     }
 }
