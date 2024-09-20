@@ -2,6 +2,8 @@ class Coin extends CollectableObject {
     height = 125;
     width = 125;
 
+    coin_sound = new Audio('../audio/coin.mp3');
+
     constructor(x, y) {
         super();
         this.x = x;
@@ -12,7 +14,11 @@ class Coin extends CollectableObject {
     // Überschreibt die onCollect Methode, um spezifische Aktionen auszuführen, wenn eine Münze eingesammelt wird.
     onCollect() {
         super.onCollect();
-        world.character.score += 10;  // Füge 10 Punkte hinzu, wenn die Münze gesammelt wird
-        console.log('Coin collected! Score: ' + world.character.score);
+        this.coin_sound.play();
+        
+        let newPercentage = Math.min(world.collectableObjectBar.percentage + 10, 100);
+        world.collectableObjectBar.setPercentage(newPercentage);
+
+        console.log('Coin collected! Score: ' + world.collectableObjectBar.percentage);
     }
 }
