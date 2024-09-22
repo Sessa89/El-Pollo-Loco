@@ -20,7 +20,9 @@ class Bottle extends CollectableObject {
     onCollect() {
         super.onCollect();
 
-        let newPercentage = Math.min(world.throwableObjectBar.percentage + 10, 100);
+        world.throwableObjects.push(new ThrowableObject());
+
+        let newPercentage = Math.min(world.throwableObjects.length * 10, 100);
         world.throwableObjectBar.setPercentage(newPercentage);
 
         console.log('Bottle collected! Bottles: ' + ((world.throwableObjectBar.percentage) / 10));

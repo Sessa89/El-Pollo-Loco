@@ -12,7 +12,7 @@ class World {
 
     throwableObjects = [];
 
-    coin = new Coin(100, 200);
+    coin = new Coin();
     bottle = new Bottle();
 
     constructor(canvas) {
@@ -37,9 +37,11 @@ class World {
     }
 
     checkThrowObjects() {
-        if (this.keyboard.D) {
-            let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100)
-            this.throwableObjects.push(bottle);
+        if (this.keyboard.D && this.throwableObjects.length > 0) {
+            let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
+            this.throwableObjects.splice(0, 1);
+            this.level.collectableObjects.push(bottle);
+            this.throwableObjectBar.setPercentage(this.throwableObjects.length * 10);
         }
     }
 
