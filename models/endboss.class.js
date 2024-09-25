@@ -3,6 +3,7 @@ class Endboss extends MoveableObject {
     width = 250;
     y = 55;
     startX = 2500;
+    speed = 10;
     alerted = false;
     distanceToCharacter;
 
@@ -122,17 +123,31 @@ class Endboss extends MoveableObject {
 
     chaseCharacter() {
         if (world.character.x < this.x) {
-            this.x -= 5;
+            this.moveLeft();
         } else if (world.character.x > this.x) {
-            this.x += 5;
+            this.moveRight();
         }
     }
 
     returnToStart() {
         if (this.x < this.startX) {
-            this.x += 5;
+            this.moveRight();
         } else if (this.x > this.startX) {
-            this.x -= 5;
+            this.moveLeft();
+        } else {
+            this.otherDirection = false;
         }
+    }
+
+    moveLeft() {
+        super.moveLeft();
+        this.otherDirection = false;
+        // this.walking_sound.play();
+    }
+
+    moveRight() {
+        super.moveRight();
+        this.otherDirection = true;
+        // this.walking_sound.play();
     }
 }
