@@ -5,6 +5,7 @@ class Endboss extends MoveableObject {
     startX = 2500;
     speed = 10;
     alerted = false;
+    characterEnteredBossArea = false;
     distanceToCharacter;
 
     IMAGES_WALKING = [
@@ -54,7 +55,9 @@ class Endboss extends MoveableObject {
 
 
     // ADDING AUDIO FILE
+    walking_sound = new Audio('../audio/endboss_walking.mp3');
     hurt_sound = new Audio('');
+    alert_sound = new Audio('../audio/alert.mp3');
 
     constructor() {
         super().loadImage(this.IMAGES_WALKING[0]);
@@ -88,7 +91,8 @@ class Endboss extends MoveableObject {
             this.playAnimation(this.IMAGES_HURT);
         } else if (this.CharacterEntersBossArea()) {
             this.alerted = true;
-            // alert sound for a few seconds
+            this.characterEnteredBossArea = true;
+            this.alert_sound.play();
             this.playAnimation(this.IMAGES_ALERT);
             console.log('Endboss has been alerted!');
         } else if (this.CharachterIsInFieldOfVision()) {
@@ -97,7 +101,7 @@ class Endboss extends MoveableObject {
         } else if (this.CharacterIsInRangeToAttack()) {
             this.playAnimation(this.IMAGES_ATTACKING);
         } else if (this.CharacterIsOutOfSight()) {
-            this.returnToStart();
+            this.returnToStart();    
             this.playAnimation(this.IMAGES_WALKING);
         } else {
             // 
@@ -118,7 +122,7 @@ class Endboss extends MoveableObject {
     }
 
     CharacterEntersBossArea() {
-        return world.character.x >= 1900 && !this.alerted;
+        return world.character.x >= 1900 && !this.alerted && !this.characterEnteredBossArea;
     }
 
     chaseCharacter() {
@@ -142,12 +146,12 @@ class Endboss extends MoveableObject {
     moveLeft() {
         super.moveLeft();
         this.otherDirection = false;
-        // this.walking_sound.play();
+        this.walking_sound.play();
     }
 
     moveRight() {
         super.moveRight();
         this.otherDirection = true;
-        // this.walking_sound.play();
+        this.walking_sound.play();
     }
 }
