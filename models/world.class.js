@@ -9,6 +9,7 @@ class World {
     healthBar = new HealthBar();
     collectableObjectBar = new CollectableObjectBar();
     throwableObjectBar = new ThrowableObjectBar();
+    endbossHealthBar = new EndbossHealthBar();
 
     throwableObjects = [];
 
@@ -72,6 +73,7 @@ class World {
         this.addToMap(this.healthBar);
         this.addToMap(this.collectableObjectBar);
         this.addToMap(this.throwableObjectBar);
+        this.addToMap(this.endbossHealthBar);
 
         this.ctx.translate(this.camera_x, 0);   // Kamera vorschieben
 
