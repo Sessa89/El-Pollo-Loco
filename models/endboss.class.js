@@ -7,6 +7,7 @@ class Endboss extends MoveableObject {
     alerted = false;
     characterEnteredBossArea = false;
     distanceToCharacter;
+    walkingSoundPlaying = false;
 
     IMAGES_WALKING = [
         './img/4_enemie_boss_chicken/1_walk/G1.png',
@@ -80,25 +81,33 @@ class Endboss extends MoveableObject {
     }
 
     playEndbossAnimation() {
+        console.log('Distance to character:', this.distanceToCharacter);
+        console.log('Boss status - alerted:', this.alerted, 'hurt:', this.isHurt(), 'dead:', this.isDead());
+    
         if (this.isDead()) {
             this.playAnimation(this.IMAGES_DEAD);
+            console.log('Boss is dead.');
         } else if (this.isHurt()) {
-            // hurt sound       this.hurt_sound.play();
             this.playAnimation(this.IMAGES_HURT);
-        } else if (this.CharacterEntersBossArea()) {
+            this.hurt_sound.play();
+            console.log('Boss is hurt.');
+        } else if (!this.alerted && this.CharacterEntersBossArea()) {
             this.alerted = true;
             this.characterEnteredBossArea = true;
             this.alert_sound.play();
             this.playAnimation(this.IMAGES_ALERT);
             console.log('Endboss has been alerted!');
-        } else if (this.CharacterIsInFieldOfVision()) {
+        } else if (this.alerted && this.CharacterIsInRangeToAttack()) {
+            this.playAnimation(this.IMAGES_ATTACKING);
+            console.log('Boss is attacking!');
+        } else if (this.alerted && this.CharacterIsInFieldOfVision()) {
             this.chaseCharacter();
             this.playAnimation(this.IMAGES_WALKING);
-        } else if (this.CharacterIsInRangeToAttack()) {
-            this.playAnimation(this.IMAGES_ATTACKING);
-        } else if (this.CharacterIsOutOfSight()) {
-            this.returnToStart();    
+            console.log('Boss is chasing the character!');
+        } else if (this.alerted && this.CharacterIsOutOfSight()) {
+            this.returnToStart();
             this.playAnimation(this.IMAGES_WALKING);
+            console.log('Boss is returning to start.');
         }
     }
 
@@ -111,7 +120,7 @@ class Endboss extends MoveableObject {
     }
 
     CharacterIsInRangeToAttack() {
-        return this.distanceToCharacter <= 200;
+        return this.distanceToCharacter <= 150;
     }
 
     CharacterEntersBossArea() {
@@ -132,6 +141,7 @@ class Endboss extends MoveableObject {
         } else if (this.x > this.startX) {
             this.moveLeft();
         } else {
+            this.stopWalkingSound();
             this.otherDirection = false;
         }
     }
@@ -139,12 +149,27 @@ class Endboss extends MoveableObject {
     moveLeft() {
         super.moveLeft();
         this.otherDirection = false;
-        this.walking_sound.play();
+        this.playWalkingSound();
     }
 
     moveRight() {
         super.moveRight();
         this.otherDirection = true;
-        this.walking_sound.play();
+        this.playWalkingSound();
+    }
+
+    playWalkingSound() {
+        if (!this.walkingSoundPlaying) {
+            this.walking_sound.play();
+            this.walkingSoundPlaying = true;
+        }
+    }
+
+    stopWalkingSound() {
+        if (this.walkingSoundPlaying) {
+            this.walking_sound.pause();
+            this.walking_sound.currentTime = 0;
+            this.walkingSoundPlaying = false;
+        }
     }
 }
