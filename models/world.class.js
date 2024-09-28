@@ -47,19 +47,31 @@ class World {
     }
 
     checkCollisions() {
+        this.checkCollisionsWithEnemies();
+        this.checkCollisionsWithCollectableObjects();
+        this.checkCollisionsWithThrowableObjects();
+    }
+
+    checkCollisionsWithEnemies() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
                 this.character.hit();
                 this.healthBar.setPercentage(this.character.energy);
             }
         });
+    }
 
+    checkCollisionsWithCollectableObjects() {
         this.level.collectableObjects.forEach((collectableObject, index) => {
             if (this.character.isColliding(collectableObject)) {
                 collectableObject.collect(this.character);
                 this.level.collectableObjects.splice(index, 1);
             }
         });
+    }
+
+    checkCollisionsWithThrowableObjects() {
+
     }
 
     draw() {
