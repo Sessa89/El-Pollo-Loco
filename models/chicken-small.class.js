@@ -2,6 +2,8 @@ class ChickenSmall extends MoveableObject {
     y = 380;
     height = 40;
     width = 40;
+    energy = 1;
+
     IMAGES_WALKING = [
         './img/3_enemies_chicken/chicken_small/1_walk/1_w.png',
         './img/3_enemies_chicken/chicken_small/1_walk/2_w.png',
@@ -12,8 +14,9 @@ class ChickenSmall extends MoveableObject {
     ];
 
     constructor() {
-        super().loadImage('./img/3_enemies_chicken/chicken_small/1_walk/1_w.png');
+        super().loadImage(this.IMAGES_WALKING[0]);
         this.loadImages(this.IMAGES_WALKING);
+        this.loadImages(this.IMAGES_DEAD);
 
         this.x = 350 + Math.random() * 1500;     // Zahl zwischen 350 und 1850 => "Math.random()" gibt eine Zahl zwischen "0" und "1" aus
         this.speed = 0.15 + Math.random() * 0.25;
@@ -28,6 +31,7 @@ class ChickenSmall extends MoveableObject {
 
     playChickenSmallAnimation() {
         if (this.isDead()) {
+            this.speed = 0;
             this.playAnimation(this.IMAGES_DEAD);
         } else {
             this.playAnimation(this.IMAGES_WALKING);
