@@ -53,10 +53,16 @@ class World {
     }
 
     checkCollisionsWithEnemies() {
-        this.level.enemies.forEach((enemy) => {
+        this.level.enemies.forEach((enemy, index) => {
             if (this.character.isColliding(enemy)) {
-                this.character.hit();
-                this.healthBar.setPercentage(this.character.energy);
+                if (this.character.isCollidingTop(enemy, index) && this.character.isAboveGround()) {
+                    this.character.jump();
+                    enemy.hit();
+                    setTimeout(() => this.level.enemies.splice(index, 1), 2000);
+                } else {
+                    this.character.hit();
+                    this.healthBar.setPercentage(this.character.energy);
+                }
             }
         });
     }
@@ -71,7 +77,23 @@ class World {
     }
 
     checkCollisionsWithThrowableObjects() {
+        this.level.collectableObjects.forEach((object, objectIndex) => {
+            if (object instanceof ThrowableObject) {
+                this.level.enemies.forEach((enemy, enemyIndex) => {
+                    if (object.isColliding(enemy)) {
+                        enemy.hit();
+                        setTimeout(() => this.level.enemies.splice(enemyIndex, 1), 2000);
+                        this.level.collectableObjects.splice(objectIndex, 1);
+                    }
+                });
 
+                if (object.isColliding(this.level.endboss)) {
+                    this.level.endboss.hit();
+                    this.level.collectableObjects.splice(objectIndex, 1);
+                    this.endbossHealthBar.setPercentage(this.level.endboss.energy);
+                }
+            }
+        });
     }
 
     draw() {
