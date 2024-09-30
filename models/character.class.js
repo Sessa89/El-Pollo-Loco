@@ -6,6 +6,13 @@ class Character extends MoveableObject {
     lastKeyPressTime = new Date();
     idleTimeout = 15000;
 
+    offset = {
+        top: 110,
+        left: 30,
+        right: 20,
+        bottom: 10
+    };
+
     IMAGES_IDLE = [
         './img/2_character_pepe/1_idle/idle/I-1.png',
         './img/2_character_pepe/1_idle/idle/I-2.png',
@@ -150,16 +157,16 @@ class Character extends MoveableObject {
             this.playAnimation(this.IMAGES_DEAD);
         } else if (this.isHurt()) {
             this.hurt_sound.play();
+            this.hurt_sound.volume = 0.8;
             this.playAnimation(this.IMAGES_HURT);
         } else if (this.isAboveGround()) {
-            // Jump animation
             this.playAnimation(this.IMAGES_JUMPING);
         } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-            // Walk animation
             this.playAnimation(this.IMAGES_WALKING);
         } else if (timeSinceLastKeyPress > this.idleTimeout) {
             this.playAnimation(this.IMAGES_LONG_IDLE)
             this.snoring_sound.play();
+            this.snoring_sound.volume = 0.5;
         } else {
             this.snoring_sound.pause();
             this.waking_up_sound.play();

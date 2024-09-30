@@ -28,6 +28,23 @@ class DrawableObject {
         }
     }
 
+    // bessere Hitbox
+    drawHitbox(ctx) {
+        if (this instanceof Character || this instanceof Chicken || this instanceof ChickenSmall || this instanceof Bottle || this instanceof Coin || this instanceof Endboss) {
+            ctx.beginPath();
+            ctx.lineWidth = '3';
+            // ctx.strokeStyle = 'transparent';
+            ctx.strokeStyle = 'red';
+            ctx.rect(
+                this.x + this.offset.right,
+                this.y + this.offset.top,
+                this.width - (this.offset.right + this.offset.left),
+                this.height - (this.offset.top + this.offset.bottom)
+            );
+            ctx.stroke();
+        }
+    }
+
     /**
      * 
      * @param {Array} arr - ['img/image1.png', 'img/image2.png', ...]

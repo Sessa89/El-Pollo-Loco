@@ -3,6 +3,13 @@ class Bottle extends CollectableObject {
     height = 75;
     width = 75;
 
+    offset = {
+        top: 10, 
+        left: 10,
+        right: 10,
+        bottom: 5
+    };
+
     IMAGES = [
         './img/6_salsa_bottle/1_salsa_bottle_on_ground.png',
         './img/6_salsa_bottle/2_salsa_bottle_on_ground.png'

@@ -54,6 +54,16 @@ class World {
 
     checkCollisionsWithEnemies() {
         this.level.enemies.forEach((enemy, index) => {
+            if (this.character.isCollidingTop(enemy)) {
+                this.character.jump();
+                enemy.hit();
+                setTimeout(() => this.level.enemies.splice(index, 1), 2000);
+            } else if (this.character.isColliding(enemy)) {
+                this.character.hit();
+                this.healthBar.setPercentage(this.character.energy);
+            }
+            
+            /*
             if (this.character.isColliding(enemy)) {
                 if (this.character.isCollidingTop(enemy, index) && this.character.isAboveGround()) {
                     this.character.jump();
@@ -64,6 +74,7 @@ class World {
                     this.healthBar.setPercentage(this.character.energy);
                 }
             }
+            */
         });
     }
 
@@ -143,6 +154,7 @@ class World {
 
         mo.draw(this.ctx);
         mo.drawFrame(this.ctx);
+        mo.drawHitbox(this.ctx);    // HITBOX
 
         if (mo.otherDirection) {    // Einstellungen des Contexts werden resettet bzw. rückgängig gemacht damit nachfolgende Bilder nicht gespiegelt eingefügt werden
             this.flipImageBack(mo);

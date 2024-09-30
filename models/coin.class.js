@@ -2,6 +2,13 @@ class Coin extends CollectableObject {
     height = 125;
     width = 125;
 
+    offset = {
+        top: 40, 
+        left: 40,
+        right: 40,
+        bottom: 40
+    };
+
     coin_sound = new Audio('../audio/coin.mp3');
 
     constructor(x, y) {

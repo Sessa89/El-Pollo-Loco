@@ -25,10 +25,17 @@ class MoveableObject extends DrawableObject {
 
     // character.isColliding(chicken);
     isColliding(mo) {
+        return this.x + this.width - this.offset.right > mo.x + mo.offset.right &&
+            this.y + this.height - this.offset.bottom > mo.y + mo.offset.top &&
+            this.x + this.offset.left < mo.x + mo.width - mo.offset.right &&
+            this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom;
+
+        /*
         return (this.x + this.width) >= mo.x &&
             (this.y + this.height) >= mo.y &&
             this.x <= mo.x &&
             this.y <= (mo.y + mo.height);
+        */
 
         /*
         // Bessere Formel zur Kollisionsberechnung (Genauer)
@@ -40,9 +47,9 @@ class MoveableObject extends DrawableObject {
     }
 
     isCollidingTop(mo) {
-        return (this.y + this.height) >= mo.y &&
-            this.x + this.width > mo.x &&
-            this.x < mo.x + mo.width;
+        return this.y + this.height >= mo.y &&
+            this.x < mo.x + mo.width &&
+            this.x + this.width > mo.x;
     }
 
     hit() {
