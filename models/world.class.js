@@ -34,7 +34,7 @@ class World {
         setInterval(() => {
             this.checkCollisions();
             this.checkThrowObjects();
-        }, 200);
+        }, 50);
     }
 
     checkThrowObjects() {
@@ -54,10 +54,10 @@ class World {
 
     checkCollisionsWithEnemies() {
         this.level.enemies.forEach((enemy, index) => {
-            if (this.character.isCollidingTop(enemy)) {
+            if (this.character.isAboveGround() && this.character.isCollidingTop(enemy)) {
                 this.character.jump();
                 enemy.hit();
-                setTimeout(() => this.level.enemies.splice(index, 1), 2000);
+                this.level.enemies.splice(index, 1);
             } else if (this.character.isColliding(enemy)) {
                 this.character.hit();
                 this.healthBar.setPercentage(this.character.energy);
@@ -153,8 +153,8 @@ class World {
         }
 
         mo.draw(this.ctx);
-        mo.drawFrame(this.ctx);
-        mo.drawHitbox(this.ctx);    // HITBOX
+        // mo.drawFrame(this.ctx);      // alte Hitbox
+        mo.drawHitbox(this.ctx);        // neue Hitbox
 
         if (mo.otherDirection) {    // Einstellungen des Contexts werden resettet bzw. rückgängig gemacht damit nachfolgende Bilder nicht gespiegelt eingefügt werden
             this.flipImageBack(mo);
