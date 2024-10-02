@@ -20,7 +20,7 @@ class World {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
-        
+
         this.draw();
         this.setWorld();
         this.run();
@@ -35,6 +35,8 @@ class World {
             this.checkCollisions();
             this.checkThrowObjects();
         }, 50);
+
+        setInterval(() => this.removeDeadEnemies(), 5000);
     }
 
     checkThrowObjects() {
@@ -54,15 +56,31 @@ class World {
 
     checkCollisionsWithEnemies() {
         this.level.enemies.forEach((enemy, index) => {
-            if (this.character.isAboveGround() && this.character.isCollidingTop(enemy)) {
+            if (this.character.isCollidingTop(enemy) && !enemy.died) {
+                if (this.character.isAboveGround()) {
+                    this.character.jump();
+                    enemy.hit();
+                    // this.level.enemies.splice(index, 1);
+                } else {
+                    this.character.hit();
+                    this.healthBar.setPercentage(this.character.energy);
+                }
+            }
+
+            /*
+            if (this.character.isAboveGround() && this.character.isCollidingTop(enemy) && !enemy.died) {
                 this.character.jump();
                 enemy.hit();
-                this.level.enemies.splice(index, 1);
+                // this.level.enemies.splice(index, 1);
             } else if (this.character.isColliding(enemy)) {
                 this.character.hit();
                 this.healthBar.setPercentage(this.character.energy);
             }
-            
+            */
+
+
+
+
             /*
             if (this.character.isColliding(enemy)) {
                 if (this.character.isCollidingTop(enemy, index) && this.character.isAboveGround()) {
@@ -87,13 +105,14 @@ class World {
         });
     }
 
+    // AUSSTEHEND
     checkCollisionsWithThrowableObjects() {
         this.level.collectableObjects.forEach((object, objectIndex) => {
             if (object instanceof ThrowableObject) {
                 this.level.enemies.forEach((enemy, enemyIndex) => {
                     if (object.isColliding(enemy)) {
                         enemy.hit();
-                        setTimeout(() => this.level.enemies.splice(enemyIndex, 1), 2000);
+                        // this.level.enemies.splice(enemyIndex, 1);
                         this.level.collectableObjects.splice(objectIndex, 1);
                     }
                 });
@@ -106,6 +125,14 @@ class World {
             }
         });
     }
+
+    removeDeadEnemies() {
+    this.level.enemies.forEach((enemy, index) => {
+        if (enemy.isDead()) {
+                this.level.enemies.splice(index, 1);
+            };
+    });
+}
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);

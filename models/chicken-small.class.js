@@ -3,6 +3,7 @@ class ChickenSmall extends MoveableObject {
     height = 40;
     width = 40;
     energy = 1;
+    died = false;
 
     offset = {
         top: 0,
@@ -38,6 +39,7 @@ class ChickenSmall extends MoveableObject {
 
     playChickenSmallAnimation() {
         if (this.isDead()) {
+            this.died = true;
             this.speed = 0;
             this.playAnimation(this.IMAGES_DEAD);
         } else {
