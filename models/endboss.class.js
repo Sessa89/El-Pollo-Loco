@@ -127,7 +127,7 @@ class Endboss extends MoveableObject {
     }
 
     CharacterIsInRangeToAttack() {
-        return this.distanceToCharacter <= 150;
+        return this.distanceToCharacter <= 110;
     }
 
     CharacterEntersBossArea() {
