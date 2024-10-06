@@ -2,6 +2,7 @@ class Endboss extends MoveableObject {
     height = 400;
     width = 250;
     y = 55;
+    energy = 50;
     startX = 2500;
     speed = 10;
     alerted = false;
@@ -88,33 +89,33 @@ class Endboss extends MoveableObject {
     }
 
     playEndbossAnimation() {
-        console.log('Distance to character:', this.distanceToCharacter);
-        console.log('Boss status - alerted:', this.alerted, 'hurt:', this.isHurt(), 'dead:', this.isDead());
+        // console.log('Distance to character:', this.distanceToCharacter);
+        // console.log('Boss status - alerted:', this.alerted, 'hurt:', this.isHurt(), 'dead:', this.isDead());
     
         if (this.isDead()) {
             this.playAnimation(this.IMAGES_DEAD);
-            console.log('Boss is dead.');
+            // console.log('Boss is dead.');
         } else if (this.isHurt()) {
             this.playAnimation(this.IMAGES_HURT);
             this.hurt_sound.play();
-            console.log('Boss is hurt.');
+            // console.log('Boss is hurt.');
         } else if (!this.alerted && this.CharacterEntersBossArea()) {
             this.alerted = true;
             this.characterEnteredBossArea = true;
             this.alert_sound.play();
             this.playAnimation(this.IMAGES_ALERT);
-            console.log('Endboss has been alerted!');
+            // console.log('Endboss has been alerted!');
         } else if (this.alerted && this.CharacterIsInRangeToAttack()) {
             this.playAnimation(this.IMAGES_ATTACKING);
-            console.log('Boss is attacking!');
+            // console.log('Boss is attacking!');
         } else if (this.alerted && this.CharacterIsInFieldOfVision()) {
             this.chaseCharacter();
             this.playAnimation(this.IMAGES_WALKING);
-            console.log('Boss is chasing the character!');
+            // console.log('Boss is chasing the character!');
         } else if (this.alerted && this.CharacterIsOutOfSight()) {
             this.returnToStart();
             this.playAnimation(this.IMAGES_WALKING);
-            console.log('Boss is returning to start.');
+            // console.log('Boss is returning to start.');
         }
     }
 

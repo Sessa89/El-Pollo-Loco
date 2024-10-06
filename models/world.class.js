@@ -98,9 +98,11 @@ class World {
 
     checkCollisionsWithCollectableObjects() {
         this.level.collectableObjects.forEach((collectableObject, index) => {
-            if (this.character.isColliding(collectableObject)) {
-                collectableObject.collect(this.character);
-                this.level.collectableObjects.splice(index, 1);
+            if (collectableObject instanceof Coin || collectableObject instanceof Bottle) {
+                if (this.character.isColliding(collectableObject)) {
+                    collectableObject.collect(this.character);
+                    this.level.collectableObjects.splice(index, 1);
+                }
             }
         });
     }
@@ -117,22 +119,23 @@ class World {
                     }
                 });
 
-                if (object.isColliding(this.level.endboss)) {
-                    this.level.endboss.hit();
+                let endboss = this.level.enemies[this.level.enemies.length -1];
+                if (object.isColliding(endboss)) {
+                    endboss.hit();
                     this.level.collectableObjects.splice(objectIndex, 1);
-                    this.endbossHealthBar.setPercentage(this.level.endboss.energy);
+                    this.endbossHealthBar.setPercentage(endboss.energy * 2);
                 }
             }
         });
     }
 
     removeDeadEnemies() {
-    this.level.enemies.forEach((enemy, index) => {
-        if (enemy.isDead()) {
+        this.level.enemies.forEach((enemy, index) => {
+            if (enemy.isDead()) {
                 this.level.enemies.splice(index, 1);
             };
-    });
-}
+        });
+    }
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
