@@ -5,6 +5,7 @@ class World {
     ctx;
     keyboard;
     camera_x = 0;
+    bossAreaStartX = 1900;      // look for "CharacterEntersBossArea()" in "endboss.class.js"
 
     healthBar = new HealthBar();
     collectableObjectBar = new CollectableObjectBar();
@@ -107,7 +108,6 @@ class World {
         });
     }
 
-    // AUSSTEHEND
     checkCollisionsWithThrowableObjects() {
         this.level.collectableObjects.forEach((object, objectIndex) => {
             if (object instanceof ThrowableObject) {
@@ -148,7 +148,10 @@ class World {
         this.addToMap(this.healthBar);
         this.addToMap(this.collectableObjectBar);
         this.addToMap(this.throwableObjectBar);
-        this.addToMap(this.endbossHealthBar);
+
+        if (this.character.x >= this.bossAreaStartX) {
+            this.addToMap(this.endbossHealthBar);
+        }
 
         this.ctx.translate(this.camera_x, 0);   // Kamera vorschieben
 
