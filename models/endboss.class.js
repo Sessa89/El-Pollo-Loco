@@ -60,9 +60,9 @@ class Endboss extends MoveableObject {
 
 
     // ADDING AUDIO FILE
-    walking_sound = new Audio('../audio/endboss_walking.mp3');
+    walking_sound = new Audio('./audio/endboss_walking.mp3');
     hurt_sound = new Audio('');
-    alert_sound = new Audio('../audio/alert.mp3');
+    alert_sound = new Audio('./audio/alert.mp3');
 
     constructor() {
         super().loadImage(this.IMAGES_WALKING[0]);

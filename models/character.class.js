@@ -71,11 +71,11 @@ class Character extends MoveableObject {
         './img/2_character_pepe/5_dead/D-57.png'
     ];
     world;
-    walking_sound = new Audio('../audio/running.mp3');
-    jumping_sound = new Audio('../audio/jump.mp3');
-    snoring_sound = new Audio('../audio/snoring.mp3');
-    waking_up_sound = new Audio('../audio/waking_up.mp3');
-    hurt_sound = new Audio('../audio/hurt.mp3');
+    walking_sound = new Audio('./audio/running.mp3');
+    jumping_sound = new Audio('./audio/jump.mp3');
+    snoring_sound = new Audio('./audio/snoring.mp3');
+    waking_up_sound = new Audio('./audio/waking_up.mp3');
+    hurt_sound = new Audio('./audio/hurt.mp3');
 
     constructor() {
         super().loadImage('./img/2_character_pepe/2_walk/W-21.png');

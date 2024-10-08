@@ -3,7 +3,7 @@ let world;
 let keyboard = new Keyboard();
 const sfx = {
     background_sound: Object.assign(document.createElement('Audio'), {
-        src: '../audio/music.mp3',
+        src: './audio/music.mp3',
         loop: true,
         volume: 0.6
     })
