@@ -17,10 +17,18 @@ class World {
     coin = new Coin();
     bottle = new Bottle();
 
+    gameOver = false;
+    win = false;
+    gameOverScreen;
+    winScreen;
+
     constructor(canvas) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
+
+        this.gameOverScreen = new GameScreen('./img/9_intro_outro_screens/game_over/game over!.png', 0, 0, 720, 480);
+        this.winScreen = new GameScreen('./img/9_intro_outro_screens/win/win_2.png', 200, 100, 360, 240);
 
         this.draw();
         this.setWorld();
@@ -33,11 +41,18 @@ class World {
 
     run() {
         setInterval(() => {
-            this.checkCollisions();
-            this.checkThrowObjects();
+            if (!this.gameOver) {
+                this.checkCollisions();
+                this.checkThrowObjects();
+                this.checkGameOver();
+            }
         }, 50);
 
-        setInterval(() => this.removeDeadEnemies(), 5000);
+        setInterval(() => {
+            if (!this.gameOver) {
+                this.removeDeadEnemies();
+            }
+        }, 5000);
     }
 
     checkThrowObjects() {
@@ -119,7 +134,7 @@ class World {
                     }
                 });
 
-                let endboss = this.level.enemies[this.level.enemies.length -1];
+                let endboss = this.level.enemies[this.level.enemies.length - 1];
                 if (object.isColliding(endboss)) {
                     endboss.hit();
                     this.level.collectableObjects.splice(objectIndex, 1);
@@ -137,8 +152,35 @@ class World {
         });
     }
 
-    draw() {
+    checkGameOver() {
+        let endboss = this.level.enemies[this.level.enemies.length - 1];
+
+        if (endboss.energy <= 0) {
+            this.gameOver = true;
+            this.win = true;
+        }
+
+        if (this.character.energy <= 0) {
+            this.gameOver = true;
+            this.win = false;
+        }
+    }
+
+    displayEndScreen() {
+        if (this.win) {
+            this.addToMap(this.winScreen);
+        } else {
+            this.addToMap(this.gameOverScreen);
+        }
+    }
+
+    draw() {       
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+        if (this.gameOver) {
+            this.displayEndScreen();
+            return;
+        }
 
         this.ctx.translate(this.camera_x, 0);
         this.addObjectsToMap(this.level.backgroundObjects);
