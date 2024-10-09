@@ -77,6 +77,16 @@ class Endboss extends MoveableObject {
         this.animate();
     }
 
+    muteSounds() {
+        this.walking_sound.pause();
+        // this.hurt_sound.pause();
+        this.alert_sound.pause();
+
+        this.walking_sound.currentTime = 0;
+        // this.hurt_sound.currentTime = 0;
+        this.alert_sound.currentTime = 0;
+    }
+
     animate() {
         setInterval(() => {
             this.updateDistanceToCharacter();

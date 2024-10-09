@@ -18,6 +18,12 @@ class Coin extends CollectableObject {
         this.loadImage('./img/8_coin/coin_2.png');
     }
 
+    muteSounds() {
+        this.coin_sound.pause();
+
+        this.coin_sound.currentTime = 0;
+    }
+
     // Überschreibt die onCollect Methode, um spezifische Aktionen auszuführen, wenn eine Münze eingesammelt wird.
     onCollect() {
         super.onCollect();

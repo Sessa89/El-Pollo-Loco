@@ -89,6 +89,20 @@ class Character extends MoveableObject {
         this.animate();
     }
 
+    muteSounds() {
+        this.walking_sound.pause();
+        this.jumping_sound.pause();
+        this.snoring_sound.pause();
+        this.waking_up_sound.pause();
+        this.hurt_sound.pause();
+
+        this.walking_sound.currentTime = 0;
+        this.jumping_sound.currentTime = 0;
+        this.snoring_sound.currentTime = 0;
+        this.waking_up_sound.currentTime = 0;
+        this.hurt_sound.currentTime = 0;
+    }
+
     animate() {
         setInterval(() => this.moveCharacter(), 1000 / 60);
         setInterval(() => this.playCharacterAnimation(), 100);

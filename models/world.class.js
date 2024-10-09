@@ -21,6 +21,8 @@ class World {
     win = false;
     gameOverScreen;
     winScreen;
+    gameOver_sound = new Audio('./audio/game_over.mp3');
+    winning_sound = new Audio('./audio/win.mp3');
 
     constructor(canvas) {
         this.ctx = canvas.getContext('2d');
@@ -28,7 +30,7 @@ class World {
         this.keyboard = keyboard;
 
         this.gameOverScreen = new GameScreen('./img/9_intro_outro_screens/game_over/game over!.png', 0, 0, 720, 480);
-        this.winScreen = new GameScreen('./img/9_intro_outro_screens/win/win_2.png', 200, 100, 360, 240);
+        this.winScreen = new GameScreen('./img/9_intro_outro_screens/win/win_2.png', 180, 80, 905 * 0.4, 879 * 0.4);
 
         this.draw();
         this.setWorld();
@@ -53,6 +55,16 @@ class World {
                 this.removeDeadEnemies();
             }
         }, 5000);
+    }
+
+    muteAllSounds() {
+        this.character.muteSounds();
+        this.level.enemies[this.level.enemies.length - 1].muteSounds();
+        this.coin.muteSounds();
+
+        if (isBackgroundMusicOn()) {
+            pauseBackgroundMusic();
+        }
     }
 
     checkThrowObjects() {
@@ -167,9 +179,13 @@ class World {
     }
 
     displayEndScreen() {
+        this.muteAllSounds();
+
         if (this.win) {
+            this.winning_sound.play();
             this.addToMap(this.winScreen);
         } else {
+            this.gameOver_sound.play();
             this.addToMap(this.gameOverScreen);
         }
     }
@@ -177,10 +193,7 @@ class World {
     draw() {       
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-        if (this.gameOver) {
-            this.displayEndScreen();
-            return;
-        }
+        
 
         this.ctx.translate(this.camera_x, 0);
         this.addObjectsToMap(this.level.backgroundObjects);
@@ -207,6 +220,11 @@ class World {
         // this.addToMap(this.coin);
 
         this.ctx.translate(-this.camera_x, 0);
+
+        if (this.gameOver) {
+            this.displayEndScreen();
+            return;
+        }
 
         /* this.draw();        // Funktion wiederholt sich in Endlosschleife => Computer stürzt vermutlich ab! */
         // Draw() wird immer wieder aufgerufen => Wiederholungsrate abhängig von der Grafikkarte
