@@ -8,6 +8,7 @@ body {
     background-image: url('./img/0_sonstiges/desert_2.png');
     background-position: center;
     font-family: 'zabars', Arial, Helvetica, sans-serif;
+    overflow: hidden;
 }
 
 @font-face {
@@ -33,6 +34,54 @@ canvas {
     object-fit: cover;
     cursor: pointer;
 }
+
+#fullscreen {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#menu {
+    position: absolute;
+    top: 20px;
+    left: center;
+    z-index: 100;
+}
+
+#mainMenu {
+    display: flex;
+    flex-direction: row;
+}
+
+#mainMenu.hidden {
+    display: none;
+}
+
+button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+    padding: 10px;
+    background-color: transparent;
+    border: none;
+    width: 50px;
+    height: 50px;
+}
+
+button:hover {
+    scale: 1.2;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
 
 @media only screen and (max-width: 720px) {
     canvas {

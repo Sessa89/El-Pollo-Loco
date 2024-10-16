@@ -36,6 +36,26 @@
 
     <div id="fullscreen">
         <canvas id="canvas" width="720" height="480"></canvas>
+
+        <div id="menu">
+            <div id="mainMenu">
+                <button id="playButton" onclick="startGame()"><img src="./img/0_sonstiges/app img_play.svg"></button>
+                <button id="tutorialButton" onclick="showTutorial()"><img src="./img/0_sonstiges/app img_circle-info.svg"></button>
+                <button id="controlsButton" onclick="showControls()"><img src="./img/0_sonstiges/app img_gamepad.svg"></button>
+                <button id="soundButton" onclick="toggleBackgroundMusic()"><img src="./img/0_sonstiges/app img_volume-xmark.svg"></button>
+                <button id="fullscreenButton" onclick="toggleFullscreen()"><img src="./img/0_sonstiges/app img_expand.svg"></button>
+            </div>
+    
+            <div id="tutorialMenu" style="display: none;">
+                <p>Sammle Münzen und wirf Flaschen auf Gegner!</p>
+                <button onclick="hideSubMenu()">Back</button>
+            </div>
+    
+            <div id="controlsMenu" style="display: none;">
+                <p>Steuerung: Pfeiltasten zum Bewegen, Leertaste zum Springen, D zum Werfen.</p>
+                <button onclick="hideSubMenu()">Back</button>
+            </div>
+        </div>
     </div>
 
 </body>
