@@ -9,6 +9,7 @@ const sfx = {
     })
 }
 let backgroundSoundOn = false;
+let fullscreenOn = false;
 let startScreenActive = true;
 
 function init() {
@@ -106,26 +107,34 @@ window.addEventListener('keyup', (e) => {
     if (e.keyCode == 68) keyboard.D = false;
 });
 
-
+function toggleFullscreen() {
+    if (isFullscreenOn()) {
+        exitFullscreen();
+    } else {
+        fullscreen();
+    }
+}
 
 function fullscreen() {
     let fullscreen = document.getElementById('fullscreen');
     enterFullscreen(fullscreen);
+
+    canvas.style.width = "100vw";
+    canvas.style.height = "100vh";
 }
 
 function enterFullscreen(element) {
     if (element.requestFullscreen) {
         element.requestFullscreen();
-        icons.fullscreen.src = 'img/0_sonstiges/app img_compress.svg';
-    } else if (element.msRequestFullscreen) {      // for IE11 (remove June 15, 2022)
+    } else if (element.msRequestFullscreen) {      // für IE11
         element.msRequestFullscreen();
-        icons.fullscreen.src = 'img/0_sonstiges/app img_compress.svg';
-    } else if (element.webkitRequestFullscreen) {  // iOS Safari
+    } else if (element.webkitRequestFullscreen) {  // für iOS Safari
         element.webkitRequestFullscreen();
-        icons.fullscreen.src = 'img/0_sonstiges/app img_compress.svg';
+    } else if (element.mozRequestFullScreen) {     // für Firefox
+        element.mozRequestFullScreen();
     }
-
-    drawStartScreen();
+    fullscreenOn = true;
+    document.getElementById('fullscreenButton').children[0].src = './img/0_sonstiges/app img_compress.svg';  // Icon ändern
 }
 
 function exitFullscreen() {
@@ -133,6 +142,18 @@ function exitFullscreen() {
         document.exitFullscreen();
     } else if (document.webkitExitFullscreen) {
         document.webkitExitFullscreen();
+    } else if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen();
+    } else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
     }
+    fullscreenOn = false;
+    document.getElementById('fullscreenButton').children[0].src = './img/0_sonstiges/app img_expand.svg';  // Icon zurück ändern
+
+    canvas.style.width = "720px";
+    canvas.style.height = "480px";
 }
 
+function isFullscreenOn() {
+    return fullscreenOn;
+}
