@@ -155,7 +155,7 @@ class Character extends MoveableObject {
     }
 
     canJump() {     // "&& !this.isAboveGround()" entfernen, wenn man fliegen oder schwimmen möchte
-        return this.world.keyboard.SPACE && !this.isAboveGround();
+        return this.world.keyboard.UP && !this.isAboveGround();
     }
 
     jump() {
