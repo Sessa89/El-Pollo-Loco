@@ -194,12 +194,39 @@ tr {
     }
 }
 
-@media only screen and (max-height: 480px) {
+@media only screen and (max-width: 430px) {
     canvas {
+        width: 100vw;
         height: 100vh;
     }
 
+    .d-none-mobil {
+        display: none;
+    }
+}
+
+@media only screen and (max-height: 480px) {
+    canvas {
+        height: 100vh;
+        width: 100vw;
+    }
+
     h1 {
+        display: none;
+    }
+
+    .d-none-mobil {
+        display: none;
+    }
+}
+
+@media only screen and (max-height: 400px) {
+    canvas {
+        width: 100vw;
+        height: 100vh;
+    }
+
+    .d-none-mobil {
         display: none;
     }
 }
