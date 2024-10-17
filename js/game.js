@@ -15,8 +15,41 @@ let showControlsForMobileModus = false;
 
 function init() {
     canvas = document.getElementById('canvas');
+    checkScreenOrientation();
+    window.addEventListener('resize', checkScreenOrientation);
     drawStartScreen();
 }
+
+function checkScreenOrientation() {
+    let rotateScreenMessage = document.getElementById('rotateScreenMessage');
+
+    if (window.innerHeight > window.innerWidth) {
+        if (!rotateScreenMessage) {
+            showRotateScreenMessage();
+        }
+    } else {
+        hideRotateScreenMessage();
+    }
+}
+
+function showRotateScreenMessage() {
+    let rotateScreenMessage = document.createElement('div');
+    rotateScreenMessage.id = 'rotateScreenMessage';
+    
+    let img = document.createElement('img');
+    img.src = './img/0_sonstiges/app img_screen-rotate.png';
+
+    rotateScreenMessage.appendChild(img);
+    document.body.appendChild(rotateScreenMessage);
+}
+
+function hideRotateScreenMessage() {
+    let rotateScreenMessage = document.getElementById('rotateScreenMessage');
+    if (rotateScreenMessage) {
+        rotateScreenMessage.remove();
+    }
+}
+
 
 function showStartScreen() {
     location.reload();
