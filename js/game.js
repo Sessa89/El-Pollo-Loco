@@ -35,7 +35,7 @@ function checkScreenOrientation() {
 function showRotateScreenMessage() {
     let rotateScreenMessage = document.createElement('div');
     rotateScreenMessage.id = 'rotateScreenMessage';
-    
+
     let img = document.createElement('img');
     img.src = './img/0_sonstiges/app img_screen-rotate.png';
 
@@ -94,7 +94,7 @@ function showControls() {
 
 function toggleMobileControls() {
     showControlsForMobileModus = !showControlsForMobileModus;
-    
+
     if (showControlsForMobileModus) {
         document.getElementById('btnLeft').classList.remove('d-none');
         document.getElementById('btnRight').classList.remove('d-none');

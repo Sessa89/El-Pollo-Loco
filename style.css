@@ -203,6 +203,10 @@ tr {
     .d-none-mobil {
         display: none;
     }
+
+    .d-flex-mobil {
+        display: flex;
+    }
 }
 
 @media only screen and (max-height: 480px) {
@@ -218,6 +222,10 @@ tr {
     .d-none-mobil {
         display: none;
     }
+
+    .d-flex-mobil {
+        display: flex;
+    }
 }
 
 @media only screen and (max-height: 400px) {
@@ -228,5 +236,9 @@ tr {
 
     .d-none-mobil {
         display: none;
+    }
+
+    .d-flex-mobil {
+        display: flex;
     }
 }
