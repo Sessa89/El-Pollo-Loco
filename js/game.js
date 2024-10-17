@@ -25,6 +25,12 @@ function showStartScreen() {
 function startGame() {
     startScreenActive = false;
     world = new World(canvas, keyboard);
+
+    document.getElementById('homeButton').classList.remove('d-none');
+    document.getElementById('restartButton').classList.remove('d-none');
+    document.getElementById('playButton').classList.add('d-none');
+    document.getElementById('impressumButton').classList.add('d-none');
+
     drawGame();
 }
 
@@ -54,9 +60,15 @@ function showControls() {
     document.getElementById('controlsMenu').style.display = 'block';
 }
 
+function showImpressum() {
+    document.getElementById('mainMenu').style.display = 'none';
+    document.getElementById('impressumMenu').style.display = 'block';
+}
+
 function hideSubMenu() {
     document.getElementById('tutorialMenu').style.display = 'none';
     document.getElementById('controlsMenu').style.display = 'none';
+    document.getElementById('impressumMenu').style.display = 'none';
     document.getElementById('mainMenu').style.display = 'flex';
     document.getElementById('mainMenu').style.flexDirection = 'row';
 }
@@ -85,7 +97,7 @@ function isBackgroundMusicOn() {
     return backgroundSoundOn;
 }
 
-function refreshGame() {
+function restartGame() {
     location.reload();
 }
 

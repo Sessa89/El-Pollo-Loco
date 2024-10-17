@@ -39,11 +39,14 @@
 
         <div id="menu">
             <div id="mainMenu">
+                <button id="homeButton" onclick="showStartScreen()" class="d-none"><img src="./img/0_sonstiges/app img_house.svg"></button>
+                <button id="restartButton" onclick="restartGame()" class="d-none"><img src="./img/0_sonstiges/app img_rotate-right-solid.svg"></button>
                 <button id="playButton" onclick="startGame()"><img src="./img/0_sonstiges/app img_play.svg"></button>
-                <button id="tutorialButton" onclick="showTutorial()"><img src="./img/0_sonstiges/app img_circle-info.svg"></button>
+                <button id="tutorialButton" onclick="showTutorial()"><img src="./img/0_sonstiges/app img_circle-question.svg"></button>
                 <button id="controlsButton" onclick="showControls()"><img src="./img/0_sonstiges/app img_gamepad.svg"></button>
                 <button id="soundButton" onclick="toggleBackgroundMusic()"><img src="./img/0_sonstiges/app img_volume-xmark.svg"></button>
                 <button id="fullscreenButton" onclick="toggleFullscreen()"><img src="./img/0_sonstiges/app img_expand.svg"></button>
+                <button id="impressumButton" onclick="showImpressum()"><img src="./img/0_sonstiges/app img_circle-info.svg"></button>
             </div>
     
             <div id="tutorialMenu" style="display: none;">
@@ -64,25 +67,39 @@
                     
                     <table>
                         <tr>
-                            <td><img class="controlsIMG" src="./img/0_sonstiges/app img_circle-left.svg"></td>
+                            <td><img class="subMenuIMG" src="./img/0_sonstiges/app img_circle-left.svg"></td>
                             <td>Character is moving left</td>
                         </tr>
 
                         <tr>
-                            <td><img class="controlsIMG" src="./img/0_sonstiges/app img_circle-right.svg"></td>
+                            <td><img class="subMenuIMG" src="./img/0_sonstiges/app img_circle-right.svg"></td>
                             <td>Character is moving right</td>
                         </tr>
 
                         <tr>
-                            <td><img class="controlsIMG" src="./img/0_sonstiges/app img_circle-up.svg"></td>
+                            <td><img class="subMenuIMG" src="./img/0_sonstiges/app img_circle-up.svg"></td>
                             <td>Character is jumping</td>
                         </tr>
 
                         <tr>
-                            <td><img class="controlsIMG" src="./img/0_sonstiges/app img_d.svg"></td>
+                            <td><img class="subMenuIMG" src="./img/0_sonstiges/app img_d.svg"></td>
                             <td>Character is throwing a bottle</td>
                         </tr>
                     </table>
+                </div>
+                
+                <div>
+                    <button class="backButton" onclick="hideSubMenu()"><img src="./img/0_sonstiges/app img_caret-left.svg"></button>
+                </div>
+            </div>
+
+            <div id="impressumMenu" style="display: none;">
+                <div>
+                    <h2>Impressum</h2>
+                    
+                    <p><img class="subMenuIMG" src="./img/0_sonstiges/app img_copyright-regular.svg">2024 El Pollo Loco by Philip Baumgärtner</p>
+                    <p>Images by <a href="">https://developerakademie.com/</a></p>
+                    <p>Icons by <a href="">https://fontawesome.com/</a></p>
                 </div>
                 
                 <div>
