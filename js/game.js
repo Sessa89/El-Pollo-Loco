@@ -19,8 +19,7 @@ function init() {
 }
 
 function showStartScreen() {
-    startScreenActive = true;
-    drawStartScreen();
+    location.reload();
 }
 
 function startGame() {
@@ -28,7 +27,6 @@ function startGame() {
     world = new World(canvas, keyboard);
 
     document.getElementById('homeButton').classList.remove('d-none');
-    document.getElementById('restartButton').classList.remove('d-none');
     document.getElementById('playButton').classList.add('d-none');
     document.getElementById('impressumButton').classList.add('d-none');
 
@@ -114,10 +112,6 @@ function pauseBackgroundMusic() {
 
 function isBackgroundMusicOn() {
     return backgroundSoundOn;
-}
-
-function restartGame() {
-    location.reload();
 }
 
 function toggleFullscreen() {
