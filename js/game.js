@@ -11,6 +11,7 @@ const sfx = {
 let backgroundSoundOn = false;
 let fullscreenOn = false;
 let startScreenActive = true;
+let showControlsForMobileModus = false;
 
 function init() {
     canvas = document.getElementById('canvas');
@@ -58,6 +59,24 @@ function showTutorial() {
 function showControls() {
     document.getElementById('mainMenu').style.display = 'none';
     document.getElementById('controlsMenu').style.display = 'block';
+}
+
+function toggleMobileControls() {
+    showControlsForMobileModus = !showControlsForMobileModus;
+    
+    if (showControlsForMobileModus) {
+        document.getElementById('btnLeft').classList.remove('d-none');
+        document.getElementById('btnRight').classList.remove('d-none');
+        document.getElementById('btnJump').classList.remove('d-none');
+        document.getElementById('btnThrow').classList.remove('d-none');
+        document.getElementById('toggleImage').src = './img/0_sonstiges/app img_toggle-on.svg';
+    } else {
+        document.getElementById('btnLeft').classList.add('d-none');
+        document.getElementById('btnRight').classList.add('d-none');
+        document.getElementById('btnJump').classList.add('d-none');
+        document.getElementById('btnThrow').classList.add('d-none');
+        document.getElementById('toggleImage').src = './img/0_sonstiges/app img_toggle-off.svg';
+    }
 }
 
 function showImpressum() {

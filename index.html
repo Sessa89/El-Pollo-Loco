@@ -40,83 +40,110 @@
 
         <div id="menu">
             <div id="mainMenu">
-                <button id="homeButton" onclick="showStartScreen()" class="d-none"><img src="./img/0_sonstiges/app img_house.svg"></button>
-                <button id="restartButton" onclick="restartGame()" class="d-none"><img src="./img/0_sonstiges/app img_rotate-right-solid.svg"></button>
+                <button id="homeButton" onclick="showStartScreen()" class="d-none"><img
+                        src="./img/0_sonstiges/app img_house.svg"></button>
+                <button id="restartButton" onclick="restartGame()" class="d-none"><img
+                        src="./img/0_sonstiges/app img_rotate-right-solid.svg"></button>
                 <button id="playButton" onclick="startGame()"><img src="./img/0_sonstiges/app img_play.svg"></button>
-                <button id="tutorialButton" onclick="showTutorial()"><img src="./img/0_sonstiges/app img_circle-question.svg"></button>
-                <button id="controlsButton" onclick="showControls()"><img src="./img/0_sonstiges/app img_gamepad.svg"></button>
-                <button id="soundButton" onclick="toggleBackgroundMusic()"><img src="./img/0_sonstiges/app img_volume-xmark.svg"></button>
-                <button id="fullscreenButton" onclick="toggleFullscreen()"><img src="./img/0_sonstiges/app img_expand.svg"></button>
-                <button id="impressumButton" onclick="showImpressum()"><img src="./img/0_sonstiges/app img_circle-info.svg"></button>
+                <button id="tutorialButton" onclick="showTutorial()"><img
+                        src="./img/0_sonstiges/app img_circle-question.svg"></button>
+                <button id="controlsButton" onclick="showControls()"><img
+                        src="./img/0_sonstiges/app img_gamepad.svg"></button>
+                <button id="soundButton" onclick="toggleBackgroundMusic()"><img
+                        src="./img/0_sonstiges/app img_volume-xmark.svg"></button>
+                <button id="fullscreenButton" onclick="toggleFullscreen()"><img
+                        src="./img/0_sonstiges/app img_expand.svg"></button>
+                <button id="impressumButton" onclick="showImpressum()"><img
+                        src="./img/0_sonstiges/app img_circle-info.svg"></button>
             </div>
-    
+
             <div id="tutorialMenu" style="display: none;">
                 <div>
                     <h2>How to play</h2>
-                    
-                    <p>Collect coins and bottles. Jump over the normal and small chickens to avoid them or jump on them to defeat them. At the end of the level you will face the endboss. Throw your collected bottles at the endboss to win the game.</p>
+
+                    <p>Collect coins and bottles. Jump over the normal and small chickens to avoid them or jump on them
+                        to defeat them. At the end of the level you will face the endboss. Throw your collected bottles
+                        at the endboss to win the game.</p>
                 </div>
-                
+
                 <div>
-                    <button class="backButton" onclick="hideSubMenu()"><img src="./img/0_sonstiges/app img_caret-left.svg"></button>
+                    <button class="backButton" onclick="hideSubMenu()"><img
+                            src="./img/0_sonstiges/app img_caret-left.svg"></button>
                 </div>
             </div>
-    
+
             <div id="controlsMenu" style="display: none;">
                 <div>
                     <h2>Controls</h3>
-                    
-                    <table>
-                        <tr>
-                            <td><img class="subMenuIMG" src="./img/0_sonstiges/app img_circle-left.svg"></td>
-                            <td>Character is moving left</td>
-                        </tr>
 
-                        <tr>
-                            <td><img class="subMenuIMG" src="./img/0_sonstiges/app img_circle-right.svg"></td>
-                            <td>Character is moving right</td>
-                        </tr>
+                        <table>
+                            <tr>
+                                <td><img class="subMenuIMG" src="./img/0_sonstiges/app img_circle-left.svg"></td>
+                                <td>Character is moving left</td>
+                            </tr>
 
-                        <tr>
-                            <td><img class="subMenuIMG" src="./img/0_sonstiges/app img_circle-up.svg"></td>
-                            <td>Character is jumping</td>
-                        </tr>
+                            <tr>
+                                <td><img class="subMenuIMG" src="./img/0_sonstiges/app img_circle-right.svg"></td>
+                                <td>Character is moving right</td>
+                            </tr>
 
-                        <tr>
-                            <td><img class="subMenuIMG" src="./img/0_sonstiges/app img_d.svg"></td>
-                            <td>Character is throwing a bottle</td>
-                        </tr>
-                    </table>
+                            <tr>
+                                <td><img class="subMenuIMG" src="./img/0_sonstiges/app img_circle-up.svg"></td>
+                                <td>Character is jumping</td>
+                            </tr>
+
+                            <tr>
+                                <td><img class="subMenuIMG" src="./img/0_sonstiges/app img_d.svg"></td>
+                                <td>Character is throwing a bottle</td>
+                            </tr>
+
+                            <tr>
+                                <td>Show buttons for mobile modus</td>
+                                <td>
+                                    <button id="toggleMobileControls" onclick="toggleMobileControls()">
+                                        <img id="toggleImage" class="subMenuIMG" src="./img/0_sonstiges/app img_toggle-off.svg">
+                                    </button>
+                                </td>
+                            </tr>
+                        </table>
+
+
                 </div>
-                
+
                 <div>
-                    <button class="backButton" onclick="hideSubMenu()"><img src="./img/0_sonstiges/app img_caret-left.svg"></button>
+                    <button class="backButton" onclick="hideSubMenu()"><img
+                            src="./img/0_sonstiges/app img_caret-left.svg"></button>
                 </div>
             </div>
 
             <div id="impressumMenu" style="display: none;">
                 <div>
                     <h2>Impressum</h2>
-                    
-                    <p><img class="subMenuIMG" src="./img/0_sonstiges/app img_copyright-regular.svg">2024 El Pollo Loco by Philip Baumgärtner</p>
+
+                    <p><img class="subMenuIMG" src="./img/0_sonstiges/app img_copyright-regular.svg">2024 El Pollo Loco
+                        by Philip Baumgärtner</p>
                     <p>Images by <a href="">https://developerakademie.com/</a></p>
                     <p>Icons by <a href="">https://fontawesome.com/</a></p>
                 </div>
-                
+
                 <div>
-                    <button class="backButton" onclick="hideSubMenu()"><img src="./img/0_sonstiges/app img_caret-left.svg"></button>
+                    <button class="backButton" onclick="hideSubMenu()"><img
+                            src="./img/0_sonstiges/app img_caret-left.svg"></button>
                 </div>
             </div>
         </div>
 
         <div id="mobileControls">
             <div id="leftButtons">
-                <button id="btnLeft" class="control-button"><img src="./img/0_sonstiges/app img_circle-left.svg"></button>
-                <button id="btnRight" class="control-button"><img src="./img/0_sonstiges/app img_circle-right.svg"></button>
+                <button id="btnLeft" class="control-button d-none"><img
+                        src="./img/0_sonstiges/app img_circle-left.svg"></button>
+                <button id="btnRight" class="control-button d-none"><img
+                        src="./img/0_sonstiges/app img_circle-right.svg"></button>
             </div>
             <div id="rightButtons">
-                <button id="btnJump" class="control-button"><img src="./img/0_sonstiges/app img_circle-up.svg"></button>
-                <button id="btnThrow" class="control-button" style="rotate: 30deg;"><img src="./img/6_salsa_bottle/salsa_bottle.png"></button>
+                <button id="btnJump" class="control-button d-none"><img src="./img/0_sonstiges/app img_circle-up.svg"></button>
+                <button id="btnThrow" class="control-button d-none" style="rotate: 30deg;"><img
+                        src="./img/6_salsa_bottle/salsa_bottle.png"></button>
             </div>
         </div>
     </div>
