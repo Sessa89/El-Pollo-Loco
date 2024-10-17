@@ -78,7 +78,7 @@ class Character extends MoveableObject {
     hurt_sound = new Audio('./audio/hurt.mp3');
 
     constructor() {
-        super().loadImage('./img/2_character_pepe/2_walk/W-21.png');
+        super().loadImage(this.IMAGES_WALKING[0]);
         this.loadImages(this.IMAGES_IDLE);
         this.loadImages(this.IMAGES_LONG_IDLE);
         this.loadImages(this.IMAGES_WALKING);
@@ -89,6 +89,10 @@ class Character extends MoveableObject {
         this.animate();
     }
 
+
+    /**
+     * This function mutes all sounds of the character.
+     */
     muteSounds() {
         this.walking_sound.pause();
         this.jumping_sound.pause();
@@ -103,11 +107,19 @@ class Character extends MoveableObject {
         this.hurt_sound.currentTime = 0;
     }
 
+
+    /**
+     * This function animates the character.
+     */
     animate() {
         setInterval(() => this.moveCharacter(), 1000 / 60);
         setInterval(() => this.playCharacterAnimation(), 100);
     }
 
+
+    /**
+     * This function is for moving the character.
+     */
     moveCharacter() {
         this.walking_sound.pause();
         let keyUsed = false;
@@ -134,35 +146,66 @@ class Character extends MoveableObject {
         this.world.camera_x = -this.x + 100;
     }
 
+
+    /**
+     * This function checks if the character is able to move right.
+     * @returns true or false
+     */
     canMoveRight() {
         return this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x;
     }
 
+
+    /**
+     * This function moves the character to the right.
+     */
     moveRight() {
         super.moveRight();
         this.otherDirection = false;
         this.walking_sound.play();
     }
 
+
+    /**
+     * This function checks if the character is able to move left.
+     * @returns true or false
+     */
     canMoveLeft() {
         return this.world.keyboard.LEFT && this.x > 0;
     }
 
+
+    /**
+     * This function moves the character to the left.
+     */
     moveLeft() {
         super.moveLeft();
         this.otherDirection = true;
         this.walking_sound.play();
     }
 
-    canJump() {     // "&& !this.isAboveGround()" entfernen, wenn man fliegen oder schwimmen möchte
+
+    /**
+     * This function checks if the character is able to jump.
+     * @returns true or false
+     */
+    canJump() {
         return this.world.keyboard.UP && !this.isAboveGround();
     }
 
+
+    /**
+     * This function lets the character jump.
+     */
     jump() {
         super.jump();
         this.jumping_sound.play();
     }
 
+
+    /**
+     * This function plays the animation of the character.
+     */
     playCharacterAnimation() {
         let currentTime = new Date();
         let timeSinceLastKeyPress = currentTime - this.lastKeyPressTime;

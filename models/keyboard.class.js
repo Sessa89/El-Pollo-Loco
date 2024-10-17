@@ -10,6 +10,10 @@ class Keyboard {
         this.bindBtnPressEvents();
     }
 
+
+    /**
+     * This function binds key down events.
+     */
     bindKeyDownEvents() {
         window.addEventListener('keydown', (e) => {
             if (e.keyCode == 37) keyboard.LEFT = true;
@@ -21,6 +25,10 @@ class Keyboard {
         });
     }
 
+
+    /**
+     * This function binds key up events.
+     */
     bindKeyUpEvents() {
         window.addEventListener('keyup', (e) => {
             if (e.keyCode == 37) keyboard.LEFT = false;
@@ -32,11 +40,19 @@ class Keyboard {
         });
     }
 
+
+    /**
+     * This function binds key press events.
+     */
     bindkeyPressEvents() {
         this.bindKeyDownEvents();
         this.bindKeyUpEvents();
     }
 
+
+    /**
+     * This function binds button press events.
+     */
     bindBtnPressEvents() {
         document.addEventListener("DOMContentLoaded", () => {
             const btnThrow = document.getElementById('btnThrow');
@@ -51,6 +67,12 @@ class Keyboard {
         });
     }
 
+
+    /**
+     * This function adds an event listener to the pressed button/key.
+     * @param {string} button 
+     * @param {string} key 
+     */
     addEventListeners(button, key) {
         button.addEventListener('mousedown', () => {
             this[key] = true;

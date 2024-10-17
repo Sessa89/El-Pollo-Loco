@@ -7,36 +7,35 @@ class DrawableObject {
     imageCache = [];
     currentImage = 0;
 
-    // loadImage('img/test.png')
+
+    /**
+     * This function loads an image.
+     * @param {string} path - Relative path of an image 
+     */
     loadImage(path) {
-        this.img = new Image();     // this.img = document.getElementById('image') <img id="image">
+        this.img = new Image();
         this.img.src = path;
     }
 
+
+    /**
+     * This function draws on the context.
+     * @param {string} ctx 
+     */
     draw(ctx) {
-        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);    // Bild wird eingefügt (nicht gespiegelt / gespiegelt)
+        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
 
-    /*
-    // Hitbox
-    drawFrame(ctx) {
-        if (this instanceof Character || this instanceof Chicken || this instanceof ChickenSmall || this instanceof Bottle || this instanceof Coin || this instanceof Endboss) {
-            ctx.beginPath();
-            ctx.lineWidth = '5';
-            ctx.strokeStyle = 'blue';
-            ctx.rect(this.x, this.y, this.width, this.height);
-            ctx.stroke();
-        }
-    }
-    */
-
-    // bessere Hitbox
+    
+    /**
+     * This function draws a hit box for better adjustment of colliding moveable objects.
+     * @param {string} ctx 
+     */
     drawHitbox(ctx) {
         if (this instanceof Character || this instanceof Chicken || this instanceof ChickenSmall || this instanceof Bottle || this instanceof Coin || this instanceof Endboss) {
             ctx.beginPath();
             ctx.lineWidth = '3';
-            // ctx.strokeStyle = 'transparent';
-            ctx.strokeStyle = 'red';
+            ctx.strokeStyle = 'transparent';
             ctx.rect(
                 this.x + this.offset.right,
                 this.y + this.offset.top,
@@ -47,15 +46,16 @@ class DrawableObject {
         }
     }
 
+    
     /**
-     * 
+     * This function load all images of an array.
      * @param {Array} arr - ['img/image1.png', 'img/image2.png', ...]
      */
-    loadImages(arr) {                           // Array wird in die Funktion gegeben (Strings/Pfade aber noch nicht wirkliche Bilder)
-        arr.forEach((path) => {                 // Für jedes Element innerhalb des Arrays wird die Schleife ausgeführt (hier: 6x)
-            let img = new Image();              // Variable "img" wird mit neuem Bild angelegt
-            img.src = path;                     // Bild wird in das Image-Object geladen hinein, Bild kann somit in das Canvas eingefügt werden
-            this.imageCache[path] = img;       // imageCache wird geupdated
+    loadImages(arr) {
+        arr.forEach((path) => {
+            let img = new Image();
+            img.src = path;
+            this.imageCache[path] = img;
         });
     }
 }

@@ -13,6 +13,10 @@ let fullscreenOn = false;
 let startScreenActive = true;
 let showControlsForMobileModus = false;
 
+
+/**
+ * This function initializes the start screen and game after checking the screen orientation.
+ */
 function init() {
     canvas = document.getElementById('canvas');
     checkScreenOrientation();
@@ -20,6 +24,10 @@ function init() {
     drawStartScreen();
 }
 
+
+/**
+ * This function checks the screen orientation (potrait or landscape).
+ */
 function checkScreenOrientation() {
     let rotateScreenMessage = document.getElementById('rotateScreenMessage');
 
@@ -32,6 +40,10 @@ function checkScreenOrientation() {
     }
 }
 
+
+/**
+ * This functions shows the screen message for rotating the mobile device.
+ */
 function showRotateScreenMessage() {
     let rotateScreenMessage = document.createElement('div');
     rotateScreenMessage.id = 'rotateScreenMessage';
@@ -43,6 +55,10 @@ function showRotateScreenMessage() {
     document.body.appendChild(rotateScreenMessage);
 }
 
+
+/**
+ * This function hides the screen message for rotating the mobile device.
+ */
 function hideRotateScreenMessage() {
     let rotateScreenMessage = document.getElementById('rotateScreenMessage');
     if (rotateScreenMessage) {
@@ -51,10 +67,17 @@ function hideRotateScreenMessage() {
 }
 
 
+/**
+ * This function shows/reloads the start screen.
+ */
 function showStartScreen() {
     location.reload();
 }
 
+
+/**
+ * This function starts the game.
+ */
 function startGame() {
     startScreenActive = false;
     world = new World(canvas, keyboard);
@@ -66,6 +89,10 @@ function startGame() {
     drawGame();
 }
 
+
+/**
+ * This function draws the start screen.
+ */
 function drawStartScreen() {
     let ctx = canvas.getContext('2d');
     let bgImage = new Image();
@@ -76,25 +103,40 @@ function drawStartScreen() {
     };
 }
 
+
+/**
+ * This function draws the game.
+ */
 function drawGame() {
     if (!startScreenActive) {
         world.draw();
     }
 }
 
+
+/**
+ * This function shows the tutorial screen/submenu.
+ */
 function showTutorial() {
     document.getElementById('mainMenu').style.display = 'none';
     document.getElementById('tutorialMenu').style.display = 'block';
 }
 
+
+/**
+ * This function shows the controls screen/submenu.
+ */
 function showControls() {
     document.getElementById('mainMenu').style.display = 'none';
     document.getElementById('controlsMenu').style.display = 'block';
 }
 
+
+/**
+ * This function toggles the mobile controls (add or remove them to the screen).
+ */
 function toggleMobileControls() {
     showControlsForMobileModus = !showControlsForMobileModus;
-
     if (showControlsForMobileModus) {
         document.getElementById('btnLeft').classList.remove('d-none');
         document.getElementById('btnRight').classList.remove('d-none');
@@ -110,11 +152,19 @@ function toggleMobileControls() {
     }
 }
 
+
+/**
+ * This function shows the impressum screen/submenu.
+ */
 function showImpressum() {
     document.getElementById('mainMenu').style.display = 'none';
     document.getElementById('impressumMenu').style.display = 'block';
 }
 
+
+/**
+ * This function hides all submenus.
+ */
 function hideSubMenu() {
     document.getElementById('tutorialMenu').style.display = 'none';
     document.getElementById('controlsMenu').style.display = 'none';
@@ -123,6 +173,10 @@ function hideSubMenu() {
     document.getElementById('mainMenu').style.flexDirection = 'row';
 }
 
+
+/**
+ * This function toggles the background music (on or off).
+ */
 function toggleBackgroundMusic() {
     if (isBackgroundMusicOn()) {
         pauseBackgroundMusic();
@@ -131,22 +185,39 @@ function toggleBackgroundMusic() {
     }
 }
 
+
+/**
+ * This function plays the background music.
+ */
 function playBackgroundMusic() {
     backgroundSoundOn = true;
     sfx.background_sound.play();
     document.getElementById('soundButton').children[0].src = './img/0_sonstiges/app img_volume-high.svg';
 }
 
+
+/**
+ * This function pauses the background music.
+ */
 function pauseBackgroundMusic() {
     backgroundSoundOn = false;
     sfx.background_sound.pause();
     document.getElementById('soundButton').children[0].src = './img/0_sonstiges/app img_volume-xmark.svg';
 }
 
+
+/**
+ * This function checks if the background sound/music is on or off.
+ * @returns true or false
+ */
 function isBackgroundMusicOn() {
     return backgroundSoundOn;
 }
 
+
+/**
+ * This function toggles the fullscreen modus.
+ */
 function toggleFullscreen() {
     if (isFullscreenOn()) {
         exitFullscreen();
@@ -155,6 +226,10 @@ function toggleFullscreen() {
     }
 }
 
+
+/**
+ * This function is for the fullscreen modus.
+ */
 function fullscreen() {
     let fullscreen = document.getElementById('fullscreen');
     enterFullscreen(fullscreen);
@@ -163,6 +238,10 @@ function fullscreen() {
     canvas.style.height = "100vh";
 }
 
+
+/**
+ * This function is for entering the fullscreen modus.
+ */
 function enterFullscreen(element) {
     if (element.requestFullscreen) {
         element.requestFullscreen();
@@ -174,9 +253,13 @@ function enterFullscreen(element) {
         element.mozRequestFullScreen();
     }
     fullscreenOn = true;
-    document.getElementById('fullscreenButton').children[0].src = './img/0_sonstiges/app img_compress.svg';  // Icon ändern
+    document.getElementById('fullscreenButton').children[0].src = './img/0_sonstiges/app img_compress.svg';
 }
 
+
+/**
+ * This function is for exiting the fullscreen modus.
+ */
 function exitFullscreen() {
     if (document.exitFullscreen) {
         document.exitFullscreen();
@@ -188,12 +271,17 @@ function exitFullscreen() {
         document.msExitFullscreen();
     }
     fullscreenOn = false;
-    document.getElementById('fullscreenButton').children[0].src = './img/0_sonstiges/app img_expand.svg';  // Icon zurück ändern
+    document.getElementById('fullscreenButton').children[0].src = './img/0_sonstiges/app img_expand.svg';
 
     canvas.style.width = "720px";
     canvas.style.height = "480px";
 }
 
+
+/**
+ * This function checks if the fullscreen modus is on or off.
+ * @returns true or false
+ */
 function isFullscreenOn() {
     return fullscreenOn;
 }

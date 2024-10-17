@@ -58,10 +58,7 @@ class Endboss extends MoveableObject {
         './img/4_enemie_boss_chicken/5_dead/G26.png'
     ];
 
-
-    // ADDING AUDIO FILE
     walking_sound = new Audio('./audio/endboss_walking.mp3');
-    hurt_sound = new Audio('');
     alert_sound = new Audio('./audio/alert.mp3');
 
     constructor() {
@@ -77,16 +74,22 @@ class Endboss extends MoveableObject {
         this.animate();
     }
 
+
+    /**
+     * This function mutes all sounds of the endboss.
+     */
     muteSounds() {
         this.walking_sound.pause();
-        // this.hurt_sound.pause();
         this.alert_sound.pause();
 
         this.walking_sound.currentTime = 0;
-        // this.hurt_sound.currentTime = 0;
         this.alert_sound.currentTime = 0;
     }
 
+
+    /**
+     * This function animates the endboss.
+     */
     animate() {
         setInterval(() => {
             this.updateDistanceToCharacter();
@@ -94,57 +97,79 @@ class Endboss extends MoveableObject {
         }, 250);
     }
 
+
+    /**
+     * This function updates the distance to the character.
+     */
     updateDistanceToCharacter() {
         this.distanceToCharacter = Math.abs(this.x - world.character.x);
     }
 
-    playEndbossAnimation() {
-        // console.log('Distance to character:', this.distanceToCharacter);
-        // console.log('Boss status - alerted:', this.alerted, 'hurt:', this.isHurt(), 'dead:', this.isDead());
-    
+
+    /**
+     * This function plays the animation of the endboss.
+     */
+    playEndbossAnimation() {   
         if (this.isDead()) {
             this.playAnimation(this.IMAGES_DEAD);
-            // console.log('Boss is dead.');
         } else if (this.isHurt()) {
             this.playAnimation(this.IMAGES_HURT);
-            this.hurt_sound.play();
-            // console.log('Boss is hurt.');
         } else if (!this.alerted && this.CharacterEntersBossArea()) {
             this.alerted = true;
             this.characterEnteredBossArea = true;
             this.alert_sound.play();
             this.playAnimation(this.IMAGES_ALERT);
-            // console.log('Endboss has been alerted!');
         } else if (this.alerted && this.CharacterIsInRangeToAttack()) {
             this.playAnimation(this.IMAGES_ATTACKING);
-            // console.log('Boss is attacking!');
         } else if (this.alerted && this.CharacterIsInFieldOfVision()) {
             this.chaseCharacter();
             this.playAnimation(this.IMAGES_WALKING);
-            // console.log('Boss is chasing the character!');
         } else if (this.alerted && this.CharacterIsOutOfSight()) {
             this.returnToStart();
             this.playAnimation(this.IMAGES_WALKING);
-            // console.log('Boss is returning to start.');
         }
     }
 
+
+    /**
+     * This function checks if the character is in field of vision.
+     * @returns true or false
+     */
     CharacterIsInFieldOfVision() {
         return this.distanceToCharacter <= 500;
     }
 
+
+    /**
+     * This function checks if the character is out of sight.
+     * @returns true or false
+     */
     CharacterIsOutOfSight() {
         return this.alerted && this.distanceToCharacter > 500;
     }
 
+
+    /**
+     * This function checks if the character is in range to attack.
+     * @returns true or false
+     */
     CharacterIsInRangeToAttack() {
         return this.distanceToCharacter <= 110;
     }
 
+
+    /**
+     * This function checks if the character entered the boss area.
+     * @returns true or false
+     */
     CharacterEntersBossArea() {
         return world.character.x >= 1900 && !this.alerted && !this.characterEnteredBossArea;
     }
 
+
+    /**
+     * This function lets the endboss chase the character.
+     */
     chaseCharacter() {
         if (world.character.x < this.x) {
             this.moveLeft();
@@ -153,6 +178,10 @@ class Endboss extends MoveableObject {
         }
     }
 
+
+    /**
+     * This function lets the endboss return to the start point.
+     */
     returnToStart() {
         if (this.x < this.startX) {
             this.moveRight();
@@ -164,18 +193,30 @@ class Endboss extends MoveableObject {
         }
     }
 
+
+    /**
+     * This function lets the endboss move to the left.
+     */
     moveLeft() {
         super.moveLeft();
         this.otherDirection = false;
         this.playWalkingSound();
     }
 
+
+    /**
+     * This function lets the endboss move to the right.
+     */
     moveRight() {
         super.moveRight();
         this.otherDirection = true;
         this.playWalkingSound();
     }
 
+
+    /**
+     * This function plays the walking sound.
+     */
     playWalkingSound() {
         if (!this.walkingSoundPlaying) {
             this.walking_sound.play();
@@ -183,6 +224,10 @@ class Endboss extends MoveableObject {
         }
     }
 
+
+    /**
+     * This function stops the walking sound.
+     */
     stopWalkingSound() {
         if (this.walkingSoundPlaying) {
             this.walking_sound.pause();

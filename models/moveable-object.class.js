@@ -13,6 +13,10 @@ class MoveableObject extends DrawableObject {
         left: 0
     };
 
+
+    /**
+     * This function is for applying gravity.
+     */
     applyGravity() {
         setInterval(() => {
             if (this.isAboveGround() || this.speedY > 0) {
@@ -22,15 +26,25 @@ class MoveableObject extends DrawableObject {
         }, 1000 / 25);
     }
 
+
+    /**
+     * This function checks if a moveable object is above the ground.
+     * @returns true or false
+     */
     isAboveGround() {
-        if (this instanceof ThrowableObject) {      // Throwable object should always fall
+        if (this instanceof ThrowableObject) {
             return true;
         } else {
             return this.y < 140;
         }
     }
 
-    // character.isColliding(chicken);
+
+    /**
+     * This function checks if moveable objects are colliding with each other.
+     * @param {string} mo - Moveable object
+     * @returns true or false
+     */
     isColliding(mo) {
         mo.offset = mo.offset || { top: 0, right: 0, bottom: 0, left: 0 };
         this.offset = this.offset || { top: 0, right: 0, bottom: 0, left: 0 };
@@ -39,29 +53,24 @@ class MoveableObject extends DrawableObject {
             this.y + this.height - this.offset.bottom > mo.y + mo.offset.top &&
             this.x + this.offset.left < mo.x + mo.width - mo.offset.right &&
             this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom;
-
-        /*
-        return (this.x + this.width) >= mo.x &&
-            (this.y + this.height) >= mo.y &&
-            this.x <= mo.x &&
-            this.y <= (mo.y + mo.height);
-        */
-
-        /*
-        // Bessere Formel zur Kollisionsberechnung (Genauer)
-        return  (this.x + this.width) >= mo.x && this.x <= (mo.x + mo.width) && 
-                (this.y + this.offsetY + this.height) >= mo.y &&
-                (this.y + this.offsetY) <= (mo.y + mo.height) && 
-                mo.onCollisionCourse; // Optional: hiermit könnten wir schauen, ob ein Objekt sich in die richtige Richtung bewegt. Nur dann kollidieren wir. Nützlich bei Gegenständen, auf denen man stehen kann.
-        */
     }
 
+
+    /**
+     * This function checks if a moveable object is colliding with the top of another moveable object.
+     * @param {string} mo - Moveable object
+     * @returns true or false
+     */
     isCollidingTop(mo) {
         return this.y + this.height >= mo.y &&
             this.x < mo.x + mo.width &&
             this.x + this.width > mo.x;
     }
 
+
+    /**
+     * This function is for hitting a moveable object.
+     */
     hit() {
         this.energy -= 5;
         if (this.energy < 0) {
@@ -71,32 +80,58 @@ class MoveableObject extends DrawableObject {
         }
     }
 
+
+    /**
+     * This function checks if a moveable object is hurt.
+     * @returns the passed time of the last hit
+     */
     isHurt() {
-        let timepassed = new Date().getTime() - this.lastHit;   // Difference in ms
-        timepassed = timepassed / 1000;     // Difference in s
+        let timepassed = new Date().getTime() - this.lastHit;
+        timepassed = timepassed / 1000;
         return timepassed < 1;
     }
 
+
+    /**
+     * This function checks if a moveable object is dead.
+     * @returns true or false
+     */
     isDead() {
         return this.energy == 0;
     }
 
+
+    /**
+     * This function plays the animation of a moveable object.
+     * @param {object} images 
+     */
     playAnimation(images) {
-        let i = this.currentImage % images.length; // "%" = Modulo-Operator = Rest; let i = 0 % 6; => 0, Rest 0
-        // i = 0, 1, 2, 3, 4, 5, 0
-        let path = images[i];      // Beim ersten Durchlauf: currentImage = 0
-        this.img = this.imageCache[path];       // 0. Bild wird geladen
-        this.currentImage++;                    // currentImage wird erhöht => beim nächsten Durchlauf startet Intervall mit currentImage = 1
+        let i = this.currentImage % images.length;
+        let path = images[i];
+        this.img = this.imageCache[path];
+        this.currentImage++;
     }
 
+
+    /**
+     * This function moves the moveable object to the right.
+     */
     moveRight() {
         this.x += this.speed;
     }
 
+
+    /**
+     * This function moves the moveable object to the left.
+     */
     moveLeft() {
         this.x -= this.speed;
     }
 
+
+    /**
+     * This function lets the moveable object jump.
+     */
     jump() {
         this.speedY = 30;
     }

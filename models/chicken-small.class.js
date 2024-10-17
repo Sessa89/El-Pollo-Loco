@@ -26,17 +26,25 @@ class ChickenSmall extends MoveableObject {
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_DEAD);
 
-        this.x = 350 + Math.random() * 1500;     // Zahl zwischen 350 und 1850 => "Math.random()" gibt eine Zahl zwischen "0" und "1" aus
+        this.x = 350 + Math.random() * 1500;
         this.speed = 0.15 + Math.random() * 0.25;
         
         this.animate();
     }
 
+
+    /**
+     * This function animates the small chickens.
+     */
     animate() {
-        setInterval(() => this.moveLeft(), 1000 / 60);  // 60 fps
+        setInterval(() => this.moveLeft(), 1000 / 60);
         setInterval(() => this.playChickenSmallAnimation(), 100);
     }
 
+
+    /**
+     * This function plays the animation of the small chickens.
+     */
     playChickenSmallAnimation() {
         if (this.isDead()) {
             this.died = true;

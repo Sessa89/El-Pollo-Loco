@@ -7,11 +7,14 @@ class Cloud extends MoveableObject {
     constructor() {
         super().loadImage('./img/5_background/layers/4_clouds/1.png');
 
-        this.x = Math.random() * 2200;   // Zahl zwischen 0 und 2200 => "Math.random()" gibt eine Zahl zwischen "0" und "1" aus        
+        this.x = Math.random() * 2200;     
         this.animate();
     }
 
-    // alle 60 Bilder pro Sekunde wird die x-Koordinate um 0.15 Pixel verringert = 60 fps
+    
+    /**
+     * This function animates the background object, e. g. clouds.
+     */
     animate() {
         setInterval(() => {
             this.moveLeft();

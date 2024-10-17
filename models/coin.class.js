@@ -18,20 +18,25 @@ class Coin extends CollectableObject {
         this.loadImage('./img/8_coin/coin_2.png');
     }
 
+
+    /**
+     * This function mutes the sound of the collectable object.
+     */
     muteSounds() {
         this.coin_sound.pause();
 
         this.coin_sound.currentTime = 0;
     }
 
-    // Überschreibt die onCollect Methode, um spezifische Aktionen auszuführen, wenn eine Münze eingesammelt wird.
+    
+    /**
+     * This function overwrites the "onCollect"-method of the "collectable object"-class. 
+     */
     onCollect() {
         super.onCollect();
         this.coin_sound.play();
         
         let newPercentage = Math.min(world.collectableObjectBar.percentage + 10, 100);
         world.collectableObjectBar.setPercentage(newPercentage);
-
-        console.log('Coin collected! Score: ' + world.collectableObjectBar.percentage);
     }
 }

@@ -21,12 +21,22 @@ class ThrowableObjectBar extends DrawableObject {
         this.setPercentage(0);
     }
 
+
+    /**
+     * This function sets the percentage of the throwable objects depending on how many throwable objects were collected. 
+     * @param {number} percentage - The percentage for loading different
+     */
     setPercentage(percentage) {
         this.percentage = percentage;
         let path = this.IMAGES_BOTTLE[this.resolveImageIndex()];
         this.img = this.imageCache[path];
     }
 
+
+    /**
+     * This function resolves the index for specific image of the array depending on the setted percentage. 
+     * @returns a number depending on the setted percentage
+     */
     resolveImageIndex() {
         if (this.percentage == 100) {
             return 5;

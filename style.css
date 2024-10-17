@@ -30,7 +30,6 @@ h2 {
 
 canvas {
     background-color: black;
-    /*border: 8px solid rgba(0, 0, 0, 0); */
     display: block;
 }
 
@@ -133,7 +132,7 @@ tr {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    pointer-events: none; /* Buttons sind nur per Touch aktiv */
+    pointer-events: none;
 }
 
 #leftButtons, #rightButtons {
@@ -148,7 +147,7 @@ tr {
     border: none;
     background-color: rgba(255, 255, 255, 0.7);
     border-radius: 50%;
-    pointer-events: auto; /* Touch-Veranstaltungen für Buttons aktivieren */
+    pointer-events: auto;
 }
 
 .control-button img {

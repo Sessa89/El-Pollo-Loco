@@ -23,7 +23,10 @@ class Bottle extends CollectableObject {
         this.loadImage(randomImage);
     }
 
-    // Überschreibt die onCollect Methode, um Flaschen zur Anzahl der Wurfobjekte hinzuzufügen.
+    
+    /**
+     * This function overwrites the "onCollect"-method of the "collectable object"-class in order to push the collectable objects, e. g. bottle, to the throwable objects. 
+     */
     onCollect() {
         super.onCollect();
 
@@ -31,7 +34,5 @@ class Bottle extends CollectableObject {
 
         let newPercentage = Math.min(world.throwableObjects.length * 10, 100);
         world.throwableObjectBar.setPercentage(newPercentage);
-
-        console.log('Bottle collected! Bottles: ' + ((world.throwableObjectBar.percentage) / 10));
     }
 }

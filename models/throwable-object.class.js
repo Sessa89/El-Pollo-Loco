@@ -9,6 +9,10 @@ class ThrowableObject extends MoveableObject {
         this.throw();
     }
 
+
+    /**
+     * This function throws a throwable object.
+     */
     throw() {
         this.speedY = 30;
         this.applyGravity();

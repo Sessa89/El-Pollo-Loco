@@ -21,6 +21,11 @@ const level1 = new Level(
     [...createMaps([map1, map2], mapPositions)]
 );
 
+
+/**
+ * This function creates all enemies.
+ * @returns all enemies
+ */
 function createEnemies() {
     let enemies = [];
 
@@ -31,6 +36,12 @@ function createEnemies() {
     return enemies;
 }
 
+
+/**
+ * This function creates the first enemy type.
+ * @param {number} count - The amount of enemies that will be created. 
+ * @returns all enemies of the first type
+ */
 function createFirstEnemyType(count) {
     let enemies = [];
 
@@ -41,6 +52,12 @@ function createFirstEnemyType(count) {
     return enemies;
 }
 
+
+/**
+ * This function creates the second enemy type.
+ * @param {number} count - The amount of enemies that will be created. 
+ * @returns all enemies of the second type
+ */
 function createSecondEnemyType(count) {
     let enemies = [];
 
@@ -51,6 +68,11 @@ function createSecondEnemyType(count) {
     return enemies;
 }
 
+
+/**
+ * This function creates background objects.
+ * @returns background objects
+ */
 function createBackgroundObjects() {
     let backgroundObjects = [];
 
@@ -59,6 +81,12 @@ function createBackgroundObjects() {
     return backgroundObjects;
 }
 
+
+/**
+ * This function creates the first background object type.
+ * @param {number} count - The amount of background objects that will be created. 
+ * @returns all background objects of the first type
+ */
 function createFirstBackgroundObject(count) {
     let backgroundObject = [];
 
@@ -69,6 +97,13 @@ function createFirstBackgroundObject(count) {
     return backgroundObject;
 }
 
+
+/**
+ * This function creates all map sections.
+ * @param {array object} mapGroup - The relative path of the images for the background image.
+ * @param {number} mapPositions - The position of each map section.
+ * @returns map sections
+ */
 function createMaps(mapGroup, mapPositions) {
     let maps = [];
 
@@ -83,6 +118,11 @@ function createMaps(mapGroup, mapPositions) {
     return maps;
 }
 
+
+/**
+ * This function creates collectable objects, e. g. coins.
+ * @returns collectable objects
+ */
 function createCollectableObjects() {
     let collectables = [];
 
@@ -96,6 +136,12 @@ function createCollectableObjects() {
     return collectables;
 }
 
+
+/**
+ * This function creates collectable/throwable objects, e. g. bottles.
+ * @param {number} count - The amount of collectable/throwable objects that will be created. 
+ * @returns collectable/throwable objects
+ */
 function createBottles(count) {
     let bottles = [];
 
@@ -106,6 +152,14 @@ function createBottles(count) {
     return bottles;
 }
 
+
+/**
+ * This function creates a row of collectable objects, e. g. coins.
+ * @param {number} startX - The x-value of the starting position.
+ * @param {number} y - The y-value of the starting position.
+ * @param {number} count - The amount of collectable objects that will be created. 
+ * @returns a row of collectable objects
+ */
 function createCoinRow(startX, y, count) {
     let coins = [];
 
@@ -117,6 +171,17 @@ function createCoinRow(startX, y, count) {
     return coins;
 }
 
+
+/**
+ * This function creates a mirrored parabola of collectable objects, e. g. coins.
+ * @param {number} startX - The x-value of the starting position.
+ * @param {number} startY - The y-value of the starting position.
+ * @param {number} count - The amount of collectable objects that will be created. 
+ * @param {number} width - The width of the parabola.
+ * @param {number} height - The height of the parabola.
+ * @param {number} flatness - The flatness of the parabola.
+ * @returns a mirrored parabola of collectable objects
+ */
 function createCoinParabola(startX, startY, count, width, height, flatness = 1) {
     let coins = [];
     let midPoint = Math.floor(count / 2);
