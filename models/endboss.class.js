@@ -1,10 +1,10 @@
 class Endboss extends MoveableObject {
     height = 400;
     width = 250;
-    y = 55;
+    y = 35;
     energy = 50;
     startX = 2500;
-    speed = 10;
+    speed = 25;
     alerted = false;
     characterEnteredBossArea = false;
     distanceToCharacter;

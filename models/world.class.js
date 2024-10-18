@@ -28,6 +28,7 @@ class World {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
+        this.groundLevel = 140;
 
         this.gameOverScreen = new GameScreen('./img/9_intro_outro_screens/game_over/game over!.png', 0, 0, 720, 480);
         this.winScreen = new GameScreen('./img/9_intro_outro_screens/win/win_2.png', 180, 80, 905 * 0.4, 879 * 0.4);
@@ -52,6 +53,7 @@ class World {
     run() {
         setInterval(() => {
             if (!this.gameOver) {
+                this.checkCharacterOnGround();
                 this.checkCollisions();
                 this.checkThrowObjects();
                 this.checkGameOver();
@@ -76,6 +78,17 @@ class World {
 
         if (isBackgroundMusicOn()) {
             pauseBackgroundMusic();
+        }
+    }
+
+
+    /**
+     * This function checks if the character is on the ground.
+     */
+    checkCharacterOnGround() {
+        if (this.character.y > this.groundLevel) {
+            this.character.y = this.groundLevel;
+            this.character.speedY = 0;
         }
     }
 
