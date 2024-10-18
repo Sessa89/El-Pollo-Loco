@@ -109,7 +109,7 @@ class Endboss extends MoveableObject {
     /**
      * This function plays the animation of the endboss.
      */
-    playEndbossAnimation() {   
+    playEndbossAnimation() {
         if (this.isDead()) {
             this.playAnimation(this.IMAGES_DEAD);
         } else if (this.isHurt()) {
@@ -176,6 +176,85 @@ class Endboss extends MoveableObject {
         } else if (world.character.x > this.x) {
             this.moveRight();
         }
+
+        if (Math.random() <= 0.2 && !this.isJumping) { // chance of 20% that the endboss is jumping
+            this.jumpTowardsCharacter();
+        }
+    }
+
+
+    /**
+     * This function lets the endboss jump towards the character.
+     */
+    jumpTowardsCharacter() {
+        this.isJumping = true;
+
+        const jumpHeight = 150;
+        const jumpDuration = 1000;
+        const jumpSpeed = jumpHeight / (jumpDuration / 50);
+
+        const jumpDirection = this.getJumpDirection();
+        const originalY = this.y;
+        
+        this.executeJump(jumpHeight, jumpSpeed, jumpDirection, originalY);
+    }
+
+
+    /**
+     * This function checks in which direction the endboss have to jump to chase the character.
+     * @returns -1 or 1
+     */
+    getJumpDirection() {
+        return world.character.x < this.x ? -1 : 1;
+    }
+
+
+    /**
+     * This function executes the jump of the endboss.
+     * @param {number} jumpHeight - The height of the jump.
+     * @param {number} jumpSpeed - The speed of the jump.
+     * @param {number} jumpDirection - The direction of the jump.
+     * @param {number} originalY - The original y-value.
+     */
+    executeJump(jumpHeight, jumpSpeed, jumpDirection, originalY) {
+        let totalJumped = 0;
+    
+        const jumpInterval = setInterval(() => {
+            if (totalJumped < jumpHeight) {
+                this.performJump(jumpSpeed, jumpDirection);
+                totalJumped += jumpSpeed;
+            } else {
+                this.fallDown(originalY);
+                clearInterval(jumpInterval);
+            }
+        }, 20);
+    }
+    
+
+    /**
+     * This function performs the jump of the endboss.
+     * @param {number} jumpSpeed - The speed of the jump.
+     * @param {number} jumpDirection - The direction of the jump.
+     */
+    performJump(jumpSpeed, jumpDirection) {
+        this.y -= jumpSpeed;
+        this.x += jumpDirection * (jumpSpeed / 2);
+    }
+
+
+    /**
+     * This function lets the endboss fall to the ground after jumping.
+     */
+    fallDown(originalY) {
+        let fallSpeed = 10;
+        let fallInterval = setInterval(() => {
+            this.y += fallSpeed;
+            if (this.y >= originalY) {
+                this.y = originalY;
+                clearInterval(fallInterval);
+                this.isJumping = false;
+            }
+        }, 20);
     }
 
 
