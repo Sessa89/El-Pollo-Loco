@@ -195,6 +195,12 @@ tr {
     }
 }
 
+@media only screen and (max-width: 1180px) {
+    .d-flex-mobil {
+        display: flex;
+    }
+}
+
 @media only screen and (max-width: 430px) {
     canvas {
         width: 100vw;
