@@ -96,6 +96,7 @@ class Character extends MoveableObject {
         this.walking_sound.pause();
         this.jumping_sound.pause();
         this.snoring_sound.pause();
+        this.snoring_sound.volume = 0;
         this.hurt_sound.pause();
 
         this.walking_sound.currentTime = 0;
