@@ -207,34 +207,70 @@ class World {
 
 
     /**
-     * This function draws objects on the canvas.
-     * @returns objects
+     * This function clears the canvas.
      */
-    draw() {       
+    clearCanvas() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }
 
-        this.ctx.translate(this.camera_x, 0);
+
+    /**
+     * This function draws the background objects.
+     */
+    drawBackgroundObjects() {
         this.addObjectsToMap(this.level.backgroundObjects);
+    }
 
-        this.ctx.translate(-this.camera_x, 0);
 
-        this.addToMap(this.healthBar);
-        this.addToMap(this.collectableObjectBar);
-        this.addToMap(this.throwableObjectBar);
-
-        if (this.character.x >= this.bossAreaStartX) {
-            this.addToMap(this.endbossHealthBar);
-        }
-
-        this.ctx.translate(this.camera_x, 0);
-
+    /**
+     * This function draws moveable objects.
+     */
+    drawMoveableObjects() {
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.throwableObjects);
         this.addObjectsToMap(this.level.collectableObjects);
+    }
+
+
+    /**
+     * This function draws the user interface.
+     */
+    drawUI() {
+        this.addToMap(this.healthBar);
+        this.addToMap(this.collectableObjectBar);
+        this.addToMap(this.throwableObjectBar);
+    }
+
+
+    /**
+     * This function draws the health bar of the endboss
+     */
+    drawEndbossHealthBar() {
+        this.addToMap(this.endbossHealthBar);
+    }
+
+
+    /**
+     * This function draws objects on the canvas.
+     * @returns objects
+     */
+    draw() {       
+        this.clearCanvas();
+
+        this.ctx.translate(this.camera_x, 0);
+
+        this.drawBackgroundObjects();
+        this.drawMoveableObjects();
 
         this.ctx.translate(-this.camera_x, 0);
+
+        this.drawUI();
+
+        if (this.character.x >= this.bossAreaStartX) {
+            this.drawEndbossHealthBar();
+        }
 
         if (this.gameOver) {
             this.displayEndScreen();
@@ -242,9 +278,7 @@ class World {
         }
 
         self = this;
-        requestAnimationFrame(function () {
-            self.draw();
-        });
+        requestAnimationFrame(() => self.draw());
     }
 
 

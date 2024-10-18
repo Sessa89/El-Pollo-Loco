@@ -74,7 +74,6 @@ class Character extends MoveableObject {
     walking_sound = new Audio('./audio/running.mp3');
     jumping_sound = new Audio('./audio/jump.mp3');
     snoring_sound = new Audio('./audio/snoring.mp3');
-    waking_up_sound = new Audio('./audio/waking_up.mp3');
     hurt_sound = new Audio('./audio/hurt.mp3');
 
     constructor() {
@@ -97,13 +96,11 @@ class Character extends MoveableObject {
         this.walking_sound.pause();
         this.jumping_sound.pause();
         this.snoring_sound.pause();
-        this.waking_up_sound.pause();
         this.hurt_sound.pause();
 
         this.walking_sound.currentTime = 0;
         this.jumping_sound.currentTime = 0;
         this.snoring_sound.currentTime = 0;
-        this.waking_up_sound.currentTime = 0;
         this.hurt_sound.currentTime = 0;
     }
 
@@ -218,17 +215,34 @@ class Character extends MoveableObject {
             this.playAnimation(this.IMAGES_HURT);
         } else if (this.isAboveGround()) {
             this.playAnimation(this.IMAGES_JUMPING);
-        } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+        } else if (this.isWalking()) {
             this.playAnimation(this.IMAGES_WALKING);
-        } else if (timeSinceLastKeyPress > this.idleTimeout) {
+        } else if (this.isIdleLongEnough(timeSinceLastKeyPress)) {
             this.playAnimation(this.IMAGES_LONG_IDLE)
             this.snoring_sound.play();
             this.snoring_sound.volume = 0.5;
         } else {
             this.snoring_sound.pause();
-            this.waking_up_sound.play();
-            this.waking_up_sound.pause();
             this.playAnimation(this.IMAGES_IDLE);
         }
+    }
+
+
+    /**
+     * This function checks if the character is moving to the left or right.
+     * @returns The character is walking to the left or right.
+     */
+    isWalking() {
+        return this.world.keyboard.RIGHT || this.world.keyboard.LEFT;
+    }
+
+
+    /**
+     * This function checks if the idle is long enough.
+     * @param {number} timeSinceLastKeyPress - The time since the last key was pressed.
+     * @returns true or false
+     */
+    isIdleLongEnough(timeSinceLastKeyPress) {
+        return timeSinceLastKeyPress > this.idleTimeout;
     }
 }
