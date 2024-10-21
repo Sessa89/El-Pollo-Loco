@@ -55,10 +55,15 @@ class World {
             if (!this.gameOver) {
                 this.checkCharacterOnGround();
                 this.checkCollisions();
-                this.checkThrowObjects();
                 this.checkGameOver();
             }
         }, 50);
+
+        setInterval(() => {
+            if (!this.gameOver) {
+                this.checkThrowObjects();
+            }
+        }, 200);
 
         setInterval(() => {
             if (!this.gameOver) {
