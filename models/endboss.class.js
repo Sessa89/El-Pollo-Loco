@@ -111,23 +111,71 @@ class Endboss extends MoveableObject {
      */
     playEndbossAnimation() {
         if (this.isDead()) {
-            this.playAnimation(this.IMAGES_DEAD);
+            this.playDeadAnimation();
         } else if (this.isHurt()) {
-            this.playAnimation(this.IMAGES_HURT);
+            this.playHurtAnimation();
         } else if (!this.alerted && this.CharacterEntersBossArea()) {
-            this.alerted = true;
-            this.characterEnteredBossArea = true;
-            this.alert_sound.play();
-            this.playAnimation(this.IMAGES_ALERT);
+            this.playAlertAnimation();
         } else if (this.alerted && this.CharacterIsInRangeToAttack()) {
-            this.playAnimation(this.IMAGES_ATTACKING);
+            this.playAttackAnimation();
         } else if (this.alerted && this.CharacterIsInFieldOfVision()) {
-            this.chaseCharacter();
-            this.playAnimation(this.IMAGES_WALKING);
+            this.playChaseAnimation();
         } else if (this.alerted && this.CharacterIsOutOfSight()) {
-            this.returnToStart();
-            this.playAnimation(this.IMAGES_WALKING);
+            this.playReturnToStartAnimation();
         }
+    }
+
+
+    /**
+     * This function plays the dying animation of the endboss.
+     */
+    playDeadAnimation() {
+        this.playAnimation(this.IMAGES_DEAD);
+    }
+
+
+    /**
+     * This function plays the hurting animation of the endboss.
+     */
+    playHurtAnimation() {
+        this.playAnimation(this.IMAGES_HURT);
+    }
+
+
+    /**
+     * This function plays the alerting animation of the endboss when the character enters the boss area.
+     */
+    playAlertAnimation() {
+        this.alerted = true;
+        this.characterEnteredBossArea = true;
+        this.alert_sound.play();
+        this.playAnimation(this.IMAGES_ALERT);
+    }
+
+
+    /**
+     * This function plays the attacking animation of the endboss.
+     */
+    playAttackAnimation() {
+        this.playAnimation(this.IMAGES_ATTACKING);
+    }
+
+
+    /**
+     * This function plays the chasing animation of the endboss.
+     */
+    playChaseAnimation() {
+        this.chaseCharacter();
+        this.playAnimation(this.IMAGES_WALKING);
+    }
+
+
+    /**
+     * This function plays the return-to-start animation of the endboss.
+     */
+    playReturnToStartAnimation() {
+        this.returnToStart();
+        this.playAnimation(this.IMAGES_WALKING);
     }
 
 
@@ -195,7 +243,7 @@ class Endboss extends MoveableObject {
 
         const jumpDirection = this.getJumpDirection();
         const originalY = this.y;
-        
+
         this.executeJump(jumpHeight, jumpSpeed, jumpDirection, originalY);
     }
 
@@ -218,7 +266,7 @@ class Endboss extends MoveableObject {
      */
     executeJump(jumpHeight, jumpSpeed, jumpDirection, originalY) {
         let totalJumped = 0;
-    
+
         const jumpInterval = setInterval(() => {
             if (totalJumped < jumpHeight) {
                 this.performJump(jumpSpeed, jumpDirection);
@@ -229,7 +277,7 @@ class Endboss extends MoveableObject {
             }
         }, 20);
     }
-    
+
 
     /**
      * This function performs the jump of the endboss.

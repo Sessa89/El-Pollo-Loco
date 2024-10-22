@@ -209,23 +209,71 @@ class Character extends MoveableObject {
         let timeSinceLastKeyPress = currentTime - this.lastKeyPressTime;
 
         if (this.isDead()) {
-            this.playAnimation(this.IMAGES_DEAD);
+            this.playDeadAnimation();
         } else if (this.isHurt()) {
-            this.hurt_sound.play();
-            this.hurt_sound.volume = 0.8;
-            this.playAnimation(this.IMAGES_HURT);
+            this.playHurtAnimation();
         } else if (this.isAboveGround()) {
-            this.playAnimation(this.IMAGES_JUMPING);
+            this.playJumpAnimation();
         } else if (this.isWalking()) {
-            this.playAnimation(this.IMAGES_WALKING);
+            this.playWalkAnimation();
         } else if (this.isIdleLongEnough(timeSinceLastKeyPress)) {
-            this.playAnimation(this.IMAGES_LONG_IDLE)
-            this.snoring_sound.play();
-            this.snoring_sound.volume = 0.5;
+            this.playLongIdleAnimation();
         } else {
-            this.snoring_sound.pause();
-            this.playAnimation(this.IMAGES_IDLE);
+            this.playIdleAnimation();
         }
+    }
+
+
+    /**
+     * This function plays the dying animation of the character.
+     */
+    playDeadAnimation() {
+        this.playAnimation(this.IMAGES_DEAD);
+    }
+
+
+    /**
+     * This function plays the hurting animation of the character.
+     */
+    playHurtAnimation() {
+        this.hurt_sound.play();
+        this.hurt_sound.volume = 0.8;
+        this.playAnimation(this.IMAGES_HURT);
+    }
+
+
+    /**
+     * This function plays the jumping animation of the character.
+     */
+    playJumpAnimation() {
+        this.playAnimation(this.IMAGES_JUMPING);
+    }
+
+
+    /**
+     * This function plays the walking animation of the character.
+     */
+    playWalkAnimation() {
+        this.playAnimation(this.IMAGES_WALKING);
+    }
+
+
+    /**
+     * This function plays the long idle animation of the character.
+     */
+    playLongIdleAnimation() {
+        this.playAnimation(this.IMAGES_LONG_IDLE);
+        this.snoring_sound.play();
+        this.snoring_sound.volume = 0.5;
+    }
+
+
+    /**
+     * This function plays the idle animation of the character.
+     */
+    playIdleAnimation() {
+        this.snoring_sound.pause();
+        this.playAnimation(this.IMAGES_IDLE);
     }
 
 
