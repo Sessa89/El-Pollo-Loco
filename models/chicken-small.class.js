@@ -22,13 +22,14 @@ class ChickenSmall extends MoveableObject {
     ];
 
     constructor() {
-        super().loadImage(this.IMAGES_WALKING[0]);
+        super();
+        this.loadImage(this.IMAGES_WALKING[0]);
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_DEAD);
 
         this.x = 350 + Math.random() * 1500;
         this.speed = 0.15 + Math.random() * 0.25;
-        
+
         this.animate();
     }
 
@@ -37,8 +38,17 @@ class ChickenSmall extends MoveableObject {
      * This function animates the small chickens.
      */
     animate() {
-        setInterval(() => this.moveLeft(), 1000 / 60);
-        setInterval(() => this.playChickenSmallAnimation(), 100);
+        intervalManager.setInterval('chickenSmallMovementInterval', () => this.moveLeft(), 1000 / 60);
+        intervalManager.setInterval('chickenSmallAnimationInterval', () => this.playChickenSmallAnimation(), 100);
+    }
+
+
+    /**
+     * This function stops the animation of the small chicken.
+     */
+    stopAnimation() {
+        intervalManager.clearIntervalByName('chickenSmallMovementInterval');
+        intervalManager.clearIntervalByName('chickenSmallAnimationInterval');
     }
 
 

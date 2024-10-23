@@ -53,7 +53,7 @@ class World {
      * This function runs setted intervals for the world.
      */
     run() {
-        setInterval(() => {
+        this.intervalManager.setInterval('runInterval', () => {
             if (!this.gameOver) {
                 this.checkCharacterOnGround();
                 this.checkCollisions();
@@ -61,13 +61,13 @@ class World {
             }
         }, 50);
 
-        setInterval(() => {
+        this.intervalManager.setInterval('checkThrowObjectsInterval', () => {
             if (!this.gameOver) {
                 this.checkThrowObjects();
             }
         }, 200);
 
-        setInterval(() => {
+        this.intervalManager.setInterval('removeDeadEnemiesInterval', () => {
             if (!this.gameOver) {
                 this.removeDeadEnemies();
             }

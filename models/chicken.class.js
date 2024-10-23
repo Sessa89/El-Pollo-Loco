@@ -22,7 +22,8 @@ class Chicken extends MoveableObject {
     ];
 
     constructor() {
-        super().loadImage(this.IMAGES_WALKING[0]);
+        super();
+        this.loadImage(this.IMAGES_WALKING[0]);
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_DEAD);
 
@@ -37,8 +38,17 @@ class Chicken extends MoveableObject {
      * This function animates the chickens.
      */
     animate() {
-        setInterval(() => this.moveLeft(), 1000 / 60);
-        setInterval(() => this.playChickenAnimation(), 100);
+        intervalManager.setInterval('chickenMovementInterval', () => this.moveLeft(), 1000 / 60);
+        intervalManager.setInterval('chickenAnimationInterval', () => this.playChickenAnimation(), 100);
+    }
+
+
+    /**
+     * This function stops the animation of the chicken.
+     */
+    stopAnimation() {
+        intervalManager.clearIntervalByName('chickenMovementInterval');
+        intervalManager.clearIntervalByName('chickenAnimationInterval');
     }
 
 

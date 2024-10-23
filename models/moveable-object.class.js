@@ -18,12 +18,20 @@ class MoveableObject extends DrawableObject {
      * This function is for applying gravity.
      */
     applyGravity() {
-        setInterval(() => {
+        intervalManager.setInterval('applyGravityInterval', () => {
             if (this.isAboveGround() || this.speedY > 0) {
                 this.y -= this.speedY;
                 this.speedY -= this.acceleration;
             }
         }, 1000 / 25);
+    }
+
+
+    /**
+     * This function stops applying gravity.
+     */
+    stopApplyingGravity() {
+        intervalManager.clearIntervalByName('applyGravityInterval');
     }
 
 

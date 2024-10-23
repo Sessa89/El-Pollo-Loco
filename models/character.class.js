@@ -117,6 +117,9 @@ class Character extends MoveableObject {
     }
 
 
+    /**
+     * This function stops the animation of the character.
+     */
     stopAnimation() {
         intervalManager.clearIntervalByName('characterMovementInterval');
         intervalManager.clearIntervalByName('characterAnimationInterval');

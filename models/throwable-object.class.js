@@ -16,8 +16,14 @@ class ThrowableObject extends MoveableObject {
     throw() {
         this.speedY = 30;
         this.applyGravity();
-        setInterval(() => {
-            this.x += 10;
-        }, 25);
+        intervalManager.setInterval('throwInterval', () => this.x += 10, 25);
+    }
+
+
+    /**
+     * This function stops the animation of the throw.
+     */
+    stopThrow() {
+        intervalManager.clearIntervalByName('throwInterval');
     }
 }

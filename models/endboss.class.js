@@ -62,7 +62,8 @@ class Endboss extends MoveableObject {
     alert_sound = new Audio('./audio/alert.mp3');
 
     constructor() {
-        super().loadImage(this.IMAGES_WALKING[0]);
+        super();
+        this.loadImage(this.IMAGES_WALKING[0]);
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_ALERT);
         this.loadImages(this.IMAGES_ATTACKING);
@@ -91,7 +92,7 @@ class Endboss extends MoveableObject {
      * This function animates the endboss.
      */
     animate() {
-        setInterval(() => {
+        intervalManager.setInterval('endbossAnimationInterval', () => {
             this.updateDistanceToCharacter();
             this.playEndbossAnimation();
         }, 250);
@@ -267,13 +268,13 @@ class Endboss extends MoveableObject {
     executeJump(jumpHeight, jumpSpeed, jumpDirection, originalY) {
         let totalJumped = 0;
 
-        const jumpInterval = setInterval(() => {
+        intervalManager.setInterval('endbossJumpInterval', () => {
             if (totalJumped < jumpHeight) {
                 this.performJump(jumpSpeed, jumpDirection);
                 totalJumped += jumpSpeed;
             } else {
                 this.fallDown(originalY);
-                clearInterval(jumpInterval);
+                intervalManager.clearInterval('endbossJumpInterval');
             }
         }, 20);
     }
@@ -295,11 +296,11 @@ class Endboss extends MoveableObject {
      */
     fallDown(originalY) {
         let fallSpeed = 10;
-        let fallInterval = setInterval(() => {
+        intervalManager.setInterval('endbossFallInterval', () => {
             this.y += fallSpeed;
             if (this.y >= originalY) {
                 this.y = originalY;
-                clearInterval(fallInterval);
+                intervalManager.clearInterval('endbossFallInterval');
                 this.isJumping = false;
             }
         }, 20);

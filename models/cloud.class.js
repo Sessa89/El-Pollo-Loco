@@ -16,8 +16,14 @@ class Cloud extends MoveableObject {
      * This function animates the background object, e. g. clouds.
      */
     animate() {
-        setInterval(() => {
-            this.moveLeft();
-        }, 1000 / 60); 
+        intervalManager.setInterval('cloudMovementInterval', () => this.moveLeft(), 1000 / 60); 
+    }
+
+
+    /**
+     * This function stops the animation of the cloud.
+     */
+    stopAnimation() {
+        intervalManager.clearIntervalByName('cloudMovementInterval');
     }
 }
