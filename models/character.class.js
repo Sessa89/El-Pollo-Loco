@@ -77,7 +77,8 @@ class Character extends MoveableObject {
     hurt_sound = new Audio('./audio/hurt.mp3');
 
     constructor() {
-        super().loadImage(this.IMAGES_WALKING[0]);
+        super();
+        this.loadImage(this.IMAGES_WALKING[0]);
         this.loadImages(this.IMAGES_IDLE);
         this.loadImages(this.IMAGES_LONG_IDLE);
         this.loadImages(this.IMAGES_WALKING);
@@ -86,6 +87,7 @@ class Character extends MoveableObject {
         this.loadImages(this.IMAGES_DEAD);
         this.applyGravity();
         this.animate();
+        
     }
 
 
@@ -110,8 +112,14 @@ class Character extends MoveableObject {
      * This function animates the character.
      */
     animate() {
-        setInterval(() => this.moveCharacter(), 1000 / 60);
-        setInterval(() => this.playCharacterAnimation(), 100);
+        intervalManager.setInterval('characterMovementInterval', () => this.moveCharacter(), 1000 / 60);
+        intervalManager.setInterval('characterAnimationInterval', () => this.playCharacterAnimation(), 100);
+    }
+
+
+    stopAnimation() {
+        intervalManager.clearIntervalByName('characterMovementInterval');
+        intervalManager.clearIntervalByName('characterAnimationInterval');
     }
 
 

@@ -1,4 +1,6 @@
 class World {
+    intervalManager = new IntervalManager();
+
     character = new Character();
     level = level1;
     canvas;
