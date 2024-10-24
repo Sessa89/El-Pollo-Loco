@@ -84,6 +84,7 @@ function startGame() {
 
     document.getElementById('homeButton').classList.remove('d-none');
     document.getElementById('playButton').classList.add('d-none');
+    document.getElementById('restartButton').classList.remove('d-none');
     document.getElementById('impressumButton').classList.add('d-none');
 
     drawGame();
@@ -284,4 +285,40 @@ function exitFullscreen() {
  */
 function isFullscreenOn() {
     return fullscreenOn;
+}
+
+
+/**
+ * This function restarts the game.
+ */
+function restartGame() {
+    intervalManager.clearAllIntervals();
+
+    character = new Character();
+    level = level1;
+    healthBar = new HealthBar();
+    collectableObjectBar = new CollectableObjectBar();
+    throwableObjectBar = new ThrowableObjectBar();
+    endbossHealthBar = new EndbossHealthBar();
+    throwableObjects = [];
+    coin = new Coin();
+    bottle = new Bottle();
+    gameOver = false;
+    win = false;
+    gameOver_sound.currentTime = 0;
+    winning_sound.currentTime = 0;
+
+    pauseBackgroundMusic();
+    clearCanvas();
+    setWorld();
+    run();
+}
+
+/**
+ * Clears the canvas by resetting its dimensions and clearing any drawings.
+ */
+function clearCanvas() {
+    let ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    canvas.width = canvas.width; // Canvas zurücksetzen
 }
