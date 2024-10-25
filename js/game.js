@@ -19,6 +19,7 @@ let showControlsForMobileModus = false;
  */
 function init() {
     canvas = document.getElementById('canvas');
+    world = new World(canvas, keyboard);
     checkScreenOrientation();
     window.addEventListener('resize', checkScreenOrientation);
     drawStartScreen();
@@ -80,7 +81,7 @@ function showStartScreen() {
  */
 function startGame() {
     startScreenActive = false;
-    world = new World(canvas, keyboard);
+    world.activate();
 
     document.getElementById('homeButton').classList.remove('d-none');
     document.getElementById('playButton').classList.add('d-none');

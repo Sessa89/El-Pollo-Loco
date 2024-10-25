@@ -26,10 +26,11 @@ class World {
     gameOver_sound = new Audio('./audio/game_over.mp3');
     winning_sound = new Audio('./audio/win.mp3');
 
-    constructor(canvas) {
+    constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
+        this.active = false;
         this.groundLevel = 140;
 
         this.gameOverScreen = new GameScreen('./img/9_intro_outro_screens/game_over/game over!.png', 0, 0, 720, 480);
@@ -38,6 +39,12 @@ class World {
         this.draw();
         this.setWorld();
         this.run();
+    }
+
+
+
+    activate() {
+        this.active = true;
     }
 
 
@@ -276,29 +283,31 @@ class World {
      * This function draws objects on the canvas.
      * @returns objects
      */
-    draw() {       
-        this.clearCanvas();
+    draw() {
+        if (this.active) {
+            this.clearCanvas();
 
-        this.ctx.translate(this.camera_x, 0);
+            this.ctx.translate(this.camera_x, 0);
 
-        this.drawBackgroundObjects();
-        this.drawMoveableObjects();
+            this.drawBackgroundObjects();
+            this.drawMoveableObjects();
 
-        this.ctx.translate(-this.camera_x, 0);
+            this.ctx.translate(-this.camera_x, 0);
 
-        this.drawUI();
+            this.drawUI();
 
-        if (this.character.x >= this.bossAreaStartX) {
-            this.drawEndbossHealthBar();
+            if (this.character.x >= this.bossAreaStartX) {
+                this.drawEndbossHealthBar();
+            }
+
+            if (this.gameOver) {
+                this.displayEndScreen();
+                return;
+            }
+
+            self = this;
+            requestAnimationFrame(() => self.draw());
         }
-
-        if (this.gameOver) {
-            this.displayEndScreen();
-            return;
-        }
-
-        self = this;
-        requestAnimationFrame(() => self.draw());
     }
 
 
