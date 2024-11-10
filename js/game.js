@@ -19,7 +19,7 @@ let showControlsForMobileModus = false;
  */
 function init() {
     canvas = document.getElementById('canvas');
-    // world = new World(canvas, keyboard);
+    world = new World(canvas, keyboard);
     checkScreenOrientation();
     window.addEventListener('resize', checkScreenOrientation);
     drawStartScreen();

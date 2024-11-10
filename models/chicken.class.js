@@ -1,6 +1,10 @@
 class Chicken extends MoveableObject {
     static chickenIDCounter = 0;
     id;
+    static resetIDCounter() {
+        Chicken.chickenIDCounter = 0;
+    }
+
     y = 360;
     height = 50;
     width = 50;

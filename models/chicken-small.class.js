@@ -1,6 +1,10 @@
 class ChickenSmall extends MoveableObject {
     static smallChickenIDCounter = 0;
     id;
+    static resetIDCounter() {
+        ChickenSmall.smallChickenIDCounter = 0;
+    }
+
     y = 370;
     height = 40;
     width = 40;

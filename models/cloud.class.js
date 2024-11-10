@@ -1,6 +1,10 @@
 class Cloud extends MoveableObject {
     static cloudIDCounter = 0;
     id;
+    static resetIDCounter() {
+        Cloud.cloudIDCounter = 0;
+    }
+
     width = 500;
     height = 250;
 
