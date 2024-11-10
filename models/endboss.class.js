@@ -274,7 +274,7 @@ class Endboss extends MoveableObject {
                 totalJumped += jumpSpeed;
             } else {
                 this.fallDown(originalY);
-                intervalManager.clearInterval('endbossJumpInterval');
+                intervalManager.clearIntervalByName('endbossJumpInterval');
             }
         }, 20);
     }
@@ -300,7 +300,7 @@ class Endboss extends MoveableObject {
             this.y += fallSpeed;
             if (this.y >= originalY) {
                 this.y = originalY;
-                intervalManager.clearInterval('endbossFallInterval');
+                intervalManager.clearIntervalByName('endbossFallInterval');
                 this.isJumping = false;
             }
         }, 20);

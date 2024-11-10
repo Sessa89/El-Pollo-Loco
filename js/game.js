@@ -19,7 +19,7 @@ let showControlsForMobileModus = false;
  */
 function init() {
     canvas = document.getElementById('canvas');
-    world = new World(canvas, keyboard);
+    // world = new World(canvas, keyboard);
     checkScreenOrientation();
     window.addEventListener('resize', checkScreenOrientation);
     drawStartScreen();
@@ -81,6 +81,7 @@ function showStartScreen() {
  */
 function startGame() {
     startScreenActive = false;
+    world = new World(canvas, keyboard);
     world.activate();
 
     document.getElementById('homeButton').classList.remove('d-none');
@@ -295,24 +296,30 @@ function isFullscreenOn() {
 function restartGame() {
     intervalManager.clearAllIntervals();
 
-    character = new Character();
-    level = level1;
-    healthBar = new HealthBar();
-    collectableObjectBar = new CollectableObjectBar();
-    throwableObjectBar = new ThrowableObjectBar();
-    endbossHealthBar = new EndbossHealthBar();
-    throwableObjects = [];
-    coin = new Coin();
-    bottle = new Bottle();
-    gameOver = false;
-    win = false;
-    gameOver_sound.currentTime = 0;
-    winning_sound.currentTime = 0;
+    // character = new Character();
+    // level = level1;
+    // healthBar = new HealthBar();
+    // collectableObjectBar = new CollectableObjectBar();
+    // throwableObjectBar = new ThrowableObjectBar();
+    // endbossHealthBar = new EndbossHealthBar();
+    // throwableObjects = [];
+    // coin = new Coin();
+    // bottle = new Bottle();
+    // gameOver = false;
+    // win = false;
+    // gameOver_sound.currentTime = 0;
+    // winning_sound.currentTime = 0;
 
-    pauseBackgroundMusic();
+    // pauseBackgroundMusic();
+    // clearCanvas();
+    // setWorld();
+    // run();
+
+    if (world) {
+        world.stopAllSounds();
+    }
     clearCanvas();
-    setWorld();
-    run();
+    startGame();
 }
 
 /**

@@ -360,4 +360,20 @@ class World {
         mo.x = mo.x * -1;
         this.ctx.restore();
     }
+
+
+
+
+
+
+    stopAllSounds() {
+        this.muteAllSounds();
+        this.character.muteSounds();
+    }
+
+
+    deactivate() {
+        this.active = false;
+        intervalManager.clearAllIntervals();
+    }
 }

@@ -1,4 +1,6 @@
 class ChickenSmall extends MoveableObject {
+    static smallChickenIDCounter = 0;
+    id;
     y = 370;
     height = 40;
     width = 40;
@@ -23,6 +25,7 @@ class ChickenSmall extends MoveableObject {
 
     constructor() {
         super();
+        this.id = ChickenSmall.smallChickenIDCounter++;
         this.loadImage(this.IMAGES_WALKING[0]);
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_DEAD);
@@ -38,8 +41,8 @@ class ChickenSmall extends MoveableObject {
      * This function animates the small chickens.
      */
     animate() {
-        intervalManager.setInterval('chickenSmallMovementInterval', () => this.moveLeft(), 1000 / 60);
-        intervalManager.setInterval('chickenSmallAnimationInterval', () => this.playChickenSmallAnimation(), 100);
+        intervalManager.setInterval(`chickenSmallMovementInterval-${this.id}`, () => this.moveLeft(), 1000 / 60);
+        intervalManager.setInterval(`chickenSmallAnimationInterval-${this.id}`, () => this.playChickenSmallAnimation(), 100);
     }
 
 
@@ -47,8 +50,8 @@ class ChickenSmall extends MoveableObject {
      * This function stops the animation of the small chicken.
      */
     stopAnimation() {
-        intervalManager.clearIntervalByName('chickenSmallMovementInterval');
-        intervalManager.clearIntervalByName('chickenSmallAnimationInterval');
+        intervalManager.clearIntervalByName(`chickenSmallMovementInterval-${this.id}`);
+        intervalManager.clearIntervalByName(`chickenSmallAnimationInterval-${this.id}`);
     }
 
 

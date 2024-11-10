@@ -1,13 +1,16 @@
 class Cloud extends MoveableObject {
-    y = 20;
+    static cloudIDCounter = 0;
+    id;
     width = 500;
     height = 250;
-    speed = 0.05;
 
     constructor() {
         super().loadImage('./img/5_background/layers/4_clouds/1.png');
+        this.id = Cloud.cloudIDCounter++;
 
-        this.x = Math.random() * 2200;     
+        this.x = Math.random() * 2200;
+        this.y = Math.random() * 25;
+        this.speed = 0.05 + Math.random() * 0.1;
         this.animate();
     }
 
@@ -16,7 +19,7 @@ class Cloud extends MoveableObject {
      * This function animates the background object, e. g. clouds.
      */
     animate() {
-        intervalManager.setInterval('cloudMovementInterval', () => this.moveLeft(), 1000 / 60); 
+        intervalManager.setInterval(`cloudMovementInterval-${this.id}`, () => this.moveLeft(), 1000 / 60); 
     }
 
 
@@ -24,6 +27,6 @@ class Cloud extends MoveableObject {
      * This function stops the animation of the cloud.
      */
     stopAnimation() {
-        intervalManager.clearIntervalByName('cloudMovementInterval');
+        intervalManager.clearIntervalByName(`cloudMovementInterval-${this.id}`);
     }
 }
