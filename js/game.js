@@ -5,7 +5,7 @@ const sfx = {
     background_sound: Object.assign(document.createElement('Audio'), {
         src: './audio/music.mp3',
         loop: true,
-        volume: 0.6
+        volume: 0.05
     })
 }
 let backgroundSoundOn = false;
@@ -80,6 +80,7 @@ function showStartScreen() {
  * This function starts the game.
  */
 function startGame() {
+    initLevel();
     startScreenActive = false;
     world = new World(canvas, keyboard);
     world.activate();

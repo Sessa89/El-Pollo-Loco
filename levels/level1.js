@@ -14,12 +14,16 @@ const map2 = [
 
 const mapPositions = [-719, 0, 719, 719 * 2, 719 * 3];
 
-const level1 = new Level(
-    [...createEnemies()],
-    [...createBackgroundObjects()],
-    [...createCollectableObjects()],
-    [...createMaps([map1, map2], mapPositions)]
-);
+let level1;
+
+function initLevel() {
+    level1 = new Level(
+        [...createEnemies()],
+        [...createBackgroundObjects()],
+        [...createCollectableObjects()],
+        [...createMaps([map1, map2], mapPositions)]
+    );
+}
 
 
 /**

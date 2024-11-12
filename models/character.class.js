@@ -87,7 +87,6 @@ class Character extends MoveableObject {
         this.loadImages(this.IMAGES_DEAD);
         this.applyGravity();
         this.animate();
-        
     }
 
 
@@ -171,6 +170,7 @@ class Character extends MoveableObject {
     moveRight() {
         super.moveRight();
         this.otherDirection = false;
+        this.walking_sound.volume = 0.1;
         this.walking_sound.play();
     }
 
@@ -190,6 +190,7 @@ class Character extends MoveableObject {
     moveLeft() {
         super.moveLeft();
         this.otherDirection = true;
+        this.walking_sound.volume = 0.1;
         this.walking_sound.play();
     }
 
@@ -208,6 +209,7 @@ class Character extends MoveableObject {
      */
     jump() {
         super.jump();
+        this.jumping_sound.volume = 0.1;
         this.jumping_sound.play();
     }
 
@@ -247,8 +249,8 @@ class Character extends MoveableObject {
      * This function plays the hurting animation of the character.
      */
     playHurtAnimation() {
+        this.hurt_sound.volume = 0.2;
         this.hurt_sound.play();
-        this.hurt_sound.volume = 0.8;
         this.playAnimation(this.IMAGES_HURT);
     }
 
@@ -274,8 +276,8 @@ class Character extends MoveableObject {
      */
     playLongIdleAnimation() {
         this.playAnimation(this.IMAGES_LONG_IDLE);
+        this.snoring_sound.volume = 0.05;
         this.snoring_sound.play();
-        this.snoring_sound.volume = 0.5;
     }
 
 

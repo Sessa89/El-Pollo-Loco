@@ -34,6 +34,7 @@ class Coin extends CollectableObject {
      */
     onCollect() {
         super.onCollect();
+        this.coin_sound.volume = 0.05;
         this.coin_sound.play();
         
         let newPercentage = Math.min(world.collectableObjectBar.percentage + 10, 100);

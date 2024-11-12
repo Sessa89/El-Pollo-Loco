@@ -149,6 +149,7 @@ class Endboss extends MoveableObject {
     playAlertAnimation() {
         this.alerted = true;
         this.characterEnteredBossArea = true;
+        this.alert_sound.volume = 0.2;
         this.alert_sound.play();
         this.playAnimation(this.IMAGES_ALERT);
     }
@@ -347,6 +348,7 @@ class Endboss extends MoveableObject {
      */
     playWalkingSound() {
         if (!this.walkingSoundPlaying) {
+            this.walking_sound.volume = 0.15;
             this.walking_sound.play();
             this.walkingSoundPlaying = true;
         }

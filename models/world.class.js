@@ -224,9 +224,11 @@ class World {
         this.muteAllSounds();
 
         if (this.win) {
+            this.winning_sound.volume = 0.1;
             this.winning_sound.play();
             this.addToMap(this.winScreen);
         } else {
+            this.gameOver_sound.volume = 0.1;
             this.gameOver_sound.play();
             this.addToMap(this.gameOverScreen);
         }
@@ -362,16 +364,18 @@ class World {
     }
 
 
-
-
-
-
+    /**
+     * This function stops all sounds.
+     */
     stopAllSounds() {
         this.muteAllSounds();
         this.character.muteSounds();
     }
 
 
+    /**
+     * This function deactivates anything and clears all intervals.
+     */
     deactivate() {
         this.active = false;
         intervalManager.clearAllIntervals();
