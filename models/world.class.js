@@ -1,13 +1,14 @@
 class World {
     intervalManager = new IntervalManager();
 
-    character = new Character();
+    character;
     level = level1;
     canvas;
     ctx;
     keyboard;
     camera_x = 0;
     bossAreaStartX = 1900;      // look for "CharacterEntersBossArea()" in "endboss.class.js"
+    endbossHealthBarVisible = false;
 
     healthBar = new HealthBar();
     collectableObjectBar = new CollectableObjectBar();
@@ -35,14 +36,25 @@ class World {
 
         this.gameOverScreen = new GameScreen('./img/9_intro_outro_screens/game_over/game over!.png', 0, 0, 720, 480);
         this.winScreen = new GameScreen('./img/9_intro_outro_screens/win/win_2.png', 180, 80, 905 * 0.4, 879 * 0.4);
-
-        this.draw();
-        this.setWorld();
-        this.run();
     }
 
 
+    /**
+     * This function starts the world.
+     */
+    startWorld() {
+        initLevel();
+        this.level = level1;
+        this.character = new Character(this);
+        this.draw();
+        this.run();
+        this.setWorld();
+    }
 
+
+    /**
+     * This functions activates anything.
+     */
     activate() {
         this.active = true;
     }
@@ -255,7 +267,9 @@ class World {
      * This function draws moveable objects.
      */
     drawMoveableObjects() {
-        this.addToMap(this.character);
+        if (this.character) {
+            this.addToMap(this.character);
+        }
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.throwableObjects);
@@ -299,6 +313,10 @@ class World {
             this.drawUI();
 
             if (this.character.x >= this.bossAreaStartX) {
+                this.endbossHealthBarVisible = true;
+            }
+
+            if (this.endbossHealthBarVisible) {
                 this.drawEndbossHealthBar();
             }
 

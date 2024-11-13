@@ -209,7 +209,7 @@ class Character extends MoveableObject {
      */
     jump() {
         super.jump();
-        this.jumping_sound.volume = 0.1;
+        this.jumping_sound.volume = 0.05;
         this.jumping_sound.play();
     }
 
