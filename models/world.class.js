@@ -233,7 +233,7 @@ class World {
      * This function displays the endscreen.
      */
     displayEndScreen() {
-        this.muteAllSounds();
+        this.stopAllSounds();
 
         if (this.win) {
             this.winning_sound.volume = 0.1;
