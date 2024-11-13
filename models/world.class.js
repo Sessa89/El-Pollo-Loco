@@ -147,15 +147,17 @@ class World {
      */
     checkCollisionsWithEnemies() {
         this.level.enemies.forEach((enemy, index) => {
-            if (this.character.isCollidingTop(enemy) && !enemy.died) {
-                if (this.character.isAboveGround()) {
-                    this.character.jump();
-                    enemy.hit();
-                } else {
-                    this.character.hit();
-                    this.healthBar.setPercentage(this.character.energy);
+            if (this.character.isColliding(enemy) && !enemy.died) {
+                if (this.character.isCollidingTop(enemy)) {
+                    if (this.character.isAboveGround()) {
+                        this.character.jump();
+                        enemy.hit();
+                    } else {
+                        this.character.hit();
+                        this.healthBar.setPercentage(this.character.energy);
+                    }
                 }
-            }
+            }            
         });
     }
 
