@@ -4,10 +4,10 @@ class Bottle extends CollectableObject {
     width = 75;
 
     offset = {
-        top: 10, 
-        left: 10,
-        right: 10,
-        bottom: 5
+        top: 20,    // 10
+        left: 30,   // 10
+        right: 30,  // 10
+        bottom: 10   // 5
     };
 
     IMAGES = [
