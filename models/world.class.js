@@ -79,17 +79,11 @@ class World {
                 this.checkGameOver();
             }
         }, 50);
-
         this.intervalManager.setInterval('checkThrowObjectsInterval', () => {
-            if (!this.gameOver) {
-                this.checkThrowObjects();
-            }
+            if (!this.gameOver) this.checkThrowObjects();
         }, 200);
-
         this.intervalManager.setInterval('removeDeadEnemiesInterval', () => {
-            if (!this.gameOver) {
-                this.removeDeadEnemies();
-            }
+            if (!this.gameOver) this.removeDeadEnemies();
         }, 5000);
     }
 
@@ -194,7 +188,6 @@ class World {
                         object.break();
                     }
                 });
-
                 let endboss = this.level.enemies[this.level.enemies.length - 1];
                 if (object.isColliding(endboss)) {
                     endboss.hit();
@@ -255,7 +248,6 @@ class World {
     displayEndScreen() {
         this.deactivate();
         this.muteAllSounds();
-        
         if (this.win) {
             this.winning_sound.volume = 0.1;
             this.winning_sound.play();
@@ -352,29 +344,21 @@ class World {
     draw() {
         if (this.active) {
             this.clearCanvas();
-
             this.ctx.translate(this.camera_x, 0);
-
             this.drawBackgroundObjects();
             this.drawMoveableObjects();
-
             this.ctx.translate(-this.camera_x, 0);
-
             this.drawUI();
-
             if (this.character.x >= this.bossAreaStartX) {
                 this.endbossHealthBarVisible = true;
             }
-
             if (this.endbossHealthBarVisible) {
                 this.drawEndbossHealthBar();
             }
-
             if (this.gameOver) {
                 this.displayEndScreen();
                 return;
             }
-
             self = this;
             requestAnimationFrame(() => self.draw());
         }
