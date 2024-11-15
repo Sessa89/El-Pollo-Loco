@@ -1,5 +1,6 @@
 class ThrowableObject extends MoveableObject {
     isBreaking = false;
+    soundsMuted = true;
 
     IMAGES_BOTTLE_ROTATION = [
         './img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png',
@@ -36,6 +37,7 @@ class ThrowableObject extends MoveableObject {
      * This function mutes the sound of the breaking bottle.
      */
     muteSounds() {
+        this.soundsMuted = true;
         this.breaking_glass_sound.pause();
 
         this.breaking_glass_sound.currentTime = 0;
@@ -46,7 +48,8 @@ class ThrowableObject extends MoveableObject {
      * This function unmutes the sound of the breaking bottle.
      */
     unmuteSounds() {
-        this.breaking_glass_sound.volume = 0.08;
+        this.soundsMuted = false;
+        this.breaking_glass_sound.volume = 1;
 
         this.breaking_glass_sound.currentTime = 0;
     }
@@ -80,8 +83,10 @@ class ThrowableObject extends MoveableObject {
         intervalManager.clearIntervalByName('bottleAnimationInterval');
         this.isBreaking = true;
         this.speedY = 0;
-        this.breaking_glass_sound.volume = 0.08;
-        this.breaking_glass_sound.play();
+        if (!this.soundsMuted) {
+            this.breaking_glass_sound.volume = 1;
+            this.breaking_glass_sound.play();
+        }
         this.playAnimation(this.IMAGES_BOTTLE_SPLASH);
 
         setTimeout(() => {

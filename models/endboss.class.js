@@ -10,6 +10,7 @@ class Endboss extends MoveableObject {
     distanceToCharacter;
     walkingSoundPlaying = false;
     animationComplete = false;
+    soundsMuted = true;
 
     offset = {
         top: 60,
@@ -81,6 +82,7 @@ class Endboss extends MoveableObject {
      * This function mutes all sounds of the endboss.
      */
     muteSounds() {
+        this.soundsMuted = true;
         this.walking_sound.pause();
         this.alert_sound.pause();
 
@@ -93,6 +95,7 @@ class Endboss extends MoveableObject {
      * This function unmutes all sounds of the endboss.
      */
     unmuteSounds() {
+        this.soundsMuted = false;
         this.walking_sound.volume = 0.1;
         this.alert_sound.volume = 0.1;
 
@@ -168,8 +171,10 @@ class Endboss extends MoveableObject {
     playAlertAnimation() {
         this.alerted = true;
         this.characterEnteredBossArea = true;
-        this.alert_sound.volume = 0.1;
-        this.alert_sound.play();
+        if (!this.soundsMuted) {
+            this.alert_sound.volume = 0.1;
+            this.alert_sound.play();
+        }
         this.playAnimation(this.IMAGES_ALERT);
     }
 
@@ -366,10 +371,12 @@ class Endboss extends MoveableObject {
      * This function plays the walking sound.
      */
     playWalkingSound() {
-        if (!this.walkingSoundPlaying) {
-            this.walking_sound.volume = 0.1;
-            this.walking_sound.play();
-            this.walkingSoundPlaying = true;
+        if (!this.soundsMuted) {
+            if (!this.walkingSoundPlaying) {
+                this.walking_sound.volume = 0.1;
+                this.walking_sound.play();
+                this.walkingSoundPlaying = true;
+            }
         }
     }
 

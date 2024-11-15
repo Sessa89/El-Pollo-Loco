@@ -1,6 +1,7 @@
 class Coin extends CollectableObject {
     height = 125;
     width = 125;
+    soundsMuted = true;
 
     offset = {
         top: 40,
@@ -23,6 +24,7 @@ class Coin extends CollectableObject {
      * This function mutes the sound of the collectable object.
      */
     muteSounds() {
+        this.soundsMuted = true;
         this.coin_sound.pause();
 
         this.coin_sound.currentTime = 0;
@@ -33,6 +35,7 @@ class Coin extends CollectableObject {
      * This function unmutes the sound of the collectable object.
      */
     unmuteSounds() {
+        this.soundsMuted = false;
         this.coin_sound.volume = 0.05;
 
         this.coin_sound.currentTime = 0;
@@ -44,9 +47,10 @@ class Coin extends CollectableObject {
      */
     onCollect() {
         super.onCollect();
-        this.coin_sound.volume = 0.05;
-        this.coin_sound.play();
-
+        if (!this.soundsMuted) {
+            this.coin_sound.volume = 0.05;
+            this.coin_sound.play();
+        }
         let newPercentage = Math.min(world.collectableObjectBar.percentage + 10, 100);
         world.collectableObjectBar.setPercentage(newPercentage);
     }

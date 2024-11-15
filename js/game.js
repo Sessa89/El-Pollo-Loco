@@ -12,6 +12,7 @@ let backgroundSoundOn = false;
 let fullscreenOn = false;
 let startScreenActive = true;
 let showControlsForMobileModus = false;
+let soundsMuted = true;
 
 
 /**
@@ -189,12 +190,88 @@ function toggleBackgroundMusic() {
 
 
 /**
+ * This function toggles all sounds.
+ */
+function toggleAllSounds() {
+    soundsMuted = !soundsMuted;
+
+    if (soundsMuted) {
+        muteAllSounds();
+    } else {
+        unmuteAllSounds();
+    }
+
+    updateSoundButtonUI();
+}
+
+
+/**
+ * This function mutes all sounds.
+ */
+function muteAllSounds() {
+    if (world.character) {
+        world.character.muteSounds();
+    }
+    if (world.level) {
+        world.level.enemies.forEach(enemy => {
+            if (enemy.muteSounds) enemy.muteSounds();
+        });
+        world.level.collectableObjects.forEach(obj => {
+            if (obj.muteSounds) obj.muteSounds();
+        });
+    }
+    if (world.throwableObjects) {
+        world.throwableObjects.forEach(obj => {
+            if (obj.muteSounds) obj.muteSounds();
+        });
+    }
+
+    pauseBackgroundMusic();
+}
+
+
+/**
+ * This function unmutes all sounds.
+ */
+function unmuteAllSounds() {
+    if (world.character) world.character.unmuteSounds();
+    if (world.level) {
+        world.level.enemies.forEach(enemy => {
+            if (enemy.unmuteSounds) enemy.unmuteSounds();
+        });
+        world.level.collectableObjects.forEach(obj => {
+            if (obj.unmuteSounds) obj.unmuteSounds();
+        });
+    }
+    if (world.throwableObjects) {
+        world.throwableObjects.forEach(obj => {
+            if (obj.unmuteSounds) obj.unmuteSounds();
+        });
+    }
+
+    playBackgroundMusic();
+}
+
+
+/**
+ * This funciton updates the sound button icon if the sound is muted or unmuted.
+ */
+function updateSoundButtonUI() {
+    if (soundsMuted) {
+        document.getElementById('soundButton').children[0].src = './img/0_sonstiges/app img_volume-xmark.svg';
+    } else {
+        document.getElementById('soundButton').children[0].src = './img/0_sonstiges/app img_volume-high.svg';
+    }
+}
+
+
+/**
  * This function plays the background music.
  */
 function playBackgroundMusic() {
     backgroundSoundOn = true;
     sfx.background_sound.play();
-    document.getElementById('soundButton').children[0].src = './img/0_sonstiges/app img_volume-high.svg';
+    // document.getElementById('soundButton').children[0].src = './img/0_sonstiges/app img_volume-high.svg';
 }
 
 
@@ -204,7 +281,7 @@ function playBackgroundMusic() {
 function pauseBackgroundMusic() {
     backgroundSoundOn = false;
     sfx.background_sound.pause();
-    document.getElementById('soundButton').children[0].src = './img/0_sonstiges/app img_volume-xmark.svg';
+    // document.getElementById('soundButton').children[0].src = './img/0_sonstiges/app img_volume-xmark.svg';
 }
 
 
