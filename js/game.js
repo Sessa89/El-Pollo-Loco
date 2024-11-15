@@ -84,12 +84,10 @@ function startGame() {
     world = new World(canvas, keyboard);
     world.startWorld();
     world.activate();
-
     document.getElementById('homeButton').classList.remove('d-none');
     document.getElementById('playButton').classList.add('d-none');
     document.getElementById('restartButton').classList.remove('d-none');
     document.getElementById('impressumButton').classList.add('d-none');
-
     drawGame();
 }
 
@@ -276,7 +274,6 @@ function exitFullscreen() {
     }
     fullscreenOn = false;
     document.getElementById('fullscreenButton').children[0].src = './img/0_sonstiges/app img_expand.svg';
-
     canvas.style.width = "720px";
     canvas.style.height = "480px";
 }

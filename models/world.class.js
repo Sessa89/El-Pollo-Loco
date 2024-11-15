@@ -345,22 +345,38 @@ class World {
         if (this.active) {
             this.clearCanvas();
             this.ctx.translate(this.camera_x, 0);
-            this.drawBackgroundObjects();
-            this.drawMoveableObjects();
+            this.renderScene();
             this.ctx.translate(-this.camera_x, 0);
-            this.drawUI();
-            if (this.character.x >= this.bossAreaStartX) {
-                this.endbossHealthBarVisible = true;
-            }
-            if (this.endbossHealthBarVisible) {
-                this.drawEndbossHealthBar();
-            }
+            this.drawInterface();
             if (this.gameOver) {
                 this.displayEndScreen();
                 return;
             }
             self = this;
             requestAnimationFrame(() => self.draw());
+        }
+    }
+
+
+    /**
+     * This function renders the scene.
+     */
+    renderScene() {
+        this.drawBackgroundObjects();
+        this.drawMoveableObjects();
+    }
+
+
+    /**
+     * This function draws the interface.
+     */
+    drawInterface() {
+        this.drawUI();
+        if (this.character.x >= this.bossAreaStartX) {
+            this.endbossHealthBarVisible = true;
+        }
+        if (this.endbossHealthBarVisible) {
+            this.drawEndbossHealthBar();
         }
     }
 

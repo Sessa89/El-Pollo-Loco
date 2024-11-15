@@ -16,6 +16,10 @@ const mapPositions = [-719, 0, 719, 719 * 2, 719 * 3];
 
 let level1;
 
+
+/**
+ * This function initializes the level.
+ */
 function initLevel() {
     level1 = new Level(
         [...createEnemies()],

@@ -130,28 +130,43 @@ class Character extends MoveableObject {
      */
     moveCharacter() {
         this.walking_sound.pause();
-        let keyUsed = false;
+        const keyUsed = this.handleMovement();
 
+        if (keyUsed) {
+            this.updateLastKeyPress();
+        }
+
+        this.world.camera_x = -this.x + 100;
+    }
+
+
+    /**
+     * This function handles the movement of the character.
+     * @returns true or false depending on the key used
+     */
+    handleMovement() {
+        let keyUsed = false;
         if (this.canMoveRight()) {
             this.moveRight();
             keyUsed = true;
         }
-
         if (this.canMoveLeft()) {
             this.moveLeft();
             keyUsed = true;
         }
-
         if (this.canJump()) {
             this.jump();
             keyUsed = true;
         }
+        return keyUsed;
+    }
 
-        if (keyUsed) {
-            this.lastKeyPressTime = new Date();
-        }
 
-        this.world.camera_x = -this.x + 100;
+    /**
+     * This function updates the last pressed key.
+     */
+    updateLastKeyPress() {
+        this.lastKeyPressTime = new Date();
     }
 
 
