@@ -101,7 +101,11 @@ class World {
         this.character.muteSounds();
         this.level.enemies[this.level.enemies.length - 1].muteSounds();
         this.coin.muteSounds();
-
+        this.throwableObjects.forEach(object => {
+            if (object instanceof ThrowableObject) {
+                object.muteSounds();
+            }
+        });
         if (isBackgroundMusicOn()) {
             pauseBackgroundMusic();
         }
@@ -125,6 +129,7 @@ class World {
     checkThrowObjects() {
         if (this.keyboard.D && this.throwableObjects.length > 0) {
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
+            this.throwableObjects.push(bottle);
             this.throwableObjects.splice(0, 1);
             this.level.collectableObjects.push(bottle);
             this.throwableObjectBar.setPercentage(this.throwableObjects.length * 10);
@@ -157,7 +162,7 @@ class World {
                         this.healthBar.setPercentage(this.character.energy);
                     }
                 }
-            }            
+            }
         });
     }
 
@@ -182,22 +187,35 @@ class World {
      */
     checkCollisionsWithThrowableObjects() {
         this.level.collectableObjects.forEach((object, objectIndex) => {
-            if (object instanceof ThrowableObject) {
+            if (object instanceof ThrowableObject && !object.isBreaking) {
                 this.level.enemies.forEach((enemy, enemyIndex) => {
                     if (object.isColliding(enemy)) {
                         enemy.hit();
-                        this.level.collectableObjects.splice(objectIndex, 1);
+                        object.break();
                     }
                 });
 
                 let endboss = this.level.enemies[this.level.enemies.length - 1];
                 if (object.isColliding(endboss)) {
                     endboss.hit();
-                    this.level.collectableObjects.splice(objectIndex, 1);
+                    object.break();
                     this.endbossHealthBar.setPercentage(endboss.energy * 2);
                 }
             }
         });
+    }
+
+
+    /**
+     * This function removes the throwable object.
+     * @param {string} throwableObject 
+     */
+    removeThrowableObject(throwableObject) {
+        const objectIndex = this.throwableObjects.indexOf(throwableObject);
+
+        if (objectIndex > -1) {
+            this.throwableObjects.splice(objectIndex, 1);
+        }
     }
 
 
