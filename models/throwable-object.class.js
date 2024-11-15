@@ -62,8 +62,9 @@ class ThrowableObject extends MoveableObject {
     }
 
 
-
-
+    /**
+     * This function is for breaking bottle.
+     */
     break() {
         intervalManager.clearIntervalByName('throwInterval');
         intervalManager.clearIntervalByName('bottleAnimationInterval');
