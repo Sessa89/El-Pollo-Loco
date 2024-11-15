@@ -90,6 +90,18 @@ class Endboss extends MoveableObject {
 
 
     /**
+     * This function unmutes all sounds of the endboss.
+     */
+    unmuteSounds() {
+        this.walking_sound.volume = 0.1;
+        this.alert_sound.volume = 0.1;
+
+        this.walking_sound.currentTime = 0;
+        this.alert_sound.currentTime = 0;
+    }
+
+
+    /**
      * This function animates the endboss.
      */
     animate() {
@@ -135,10 +147,10 @@ class Endboss extends MoveableObject {
      */
     playDeadAnimation() {
         this.playAnimation(this.IMAGES_DEAD);
-        
+
         setTimeout(() => {
             this.animationComplete = true;
-        }, 2000);        
+        }, 2000);
     }
 
 

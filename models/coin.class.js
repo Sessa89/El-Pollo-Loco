@@ -3,7 +3,7 @@ class Coin extends CollectableObject {
     width = 125;
 
     offset = {
-        top: 40, 
+        top: 40,
         left: 40,
         right: 40,
         bottom: 40
@@ -28,7 +28,17 @@ class Coin extends CollectableObject {
         this.coin_sound.currentTime = 0;
     }
 
-    
+
+    /**
+     * This function unmutes the sound of the collectable object.
+     */
+    unmuteSounds() {
+        this.coin_sound.volume = 0.05;
+
+        this.coin_sound.currentTime = 0;
+    }
+
+
     /**
      * This function overwrites the "onCollect"-method of the "collectable object"-class. 
      */
@@ -36,7 +46,7 @@ class Coin extends CollectableObject {
         super.onCollect();
         this.coin_sound.volume = 0.05;
         this.coin_sound.play();
-        
+
         let newPercentage = Math.min(world.collectableObjectBar.percentage + 10, 100);
         world.collectableObjectBar.setPercentage(newPercentage);
     }

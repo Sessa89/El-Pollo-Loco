@@ -43,6 +43,16 @@ class ThrowableObject extends MoveableObject {
 
 
     /**
+     * This function unmutes the sound of the breaking bottle.
+     */
+    unmuteSounds() {
+        this.breaking_glass_sound.volume = 0.08;
+
+        this.breaking_glass_sound.currentTime = 0;
+    }
+
+
+    /**
      * This function throws a throwable object.
      */
     throw() {
@@ -73,7 +83,7 @@ class ThrowableObject extends MoveableObject {
         this.breaking_glass_sound.volume = 0.08;
         this.breaking_glass_sound.play();
         this.playAnimation(this.IMAGES_BOTTLE_SPLASH);
-        
+
         setTimeout(() => {
             this.world.removeThrowableObject(this);
         }, 30);

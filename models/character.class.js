@@ -108,6 +108,22 @@ class Character extends MoveableObject {
 
 
     /**
+     * This function unmutes all sounds of the character.
+     */
+    unmuteSounds() {
+        this.walking_sound.volume = 0.1;
+        this.jumping_sound.volume = 0.05;
+        this.snoring_sound.volume = 0.05;
+        this.hurt_sound.volume = 0.2;
+
+        this.walking_sound.currentTime = 0;
+        this.jumping_sound.currentTime = 0;
+        this.snoring_sound.currentTime = 0;
+        this.hurt_sound.currentTime = 0;
+    }
+
+
+    /**
      * This function animates the character.
      */
     animate() {
