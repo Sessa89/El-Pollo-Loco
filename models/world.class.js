@@ -253,6 +253,7 @@ class World {
      * This function displays the endscreen.
      */
     displayEndScreen() {
+        this.deactivate();
         this.muteAllSounds();
         
         if (this.win) {
