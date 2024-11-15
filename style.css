@@ -185,6 +185,11 @@ tr {
     filter: invert(100%);
 }
 
+.highlighted {
+    background-color: white;
+    border: 2px solid black;
+}
+
 .d-none {
     display: none;
 }

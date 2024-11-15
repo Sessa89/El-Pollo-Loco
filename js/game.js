@@ -295,6 +295,7 @@ function isFullscreenOn() {
  * This function restarts the game.
  */
 function restartGame() {
+    world.removeHighlightMenuButtons();
     intervalManager.clearAllIntervals();
     if (world) {
         world.stopAllSounds();
@@ -302,6 +303,7 @@ function restartGame() {
     clearCanvas();
     startGame();
 }
+
 
 /**
  * Clears the canvas by resetting its dimensions and clearing any drawings.

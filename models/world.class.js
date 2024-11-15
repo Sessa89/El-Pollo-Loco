@@ -237,14 +237,14 @@ class World {
     checkGameOver() {
         let endboss = this.level.enemies[this.level.enemies.length - 1];
 
-        if (endboss.energy <= 0) {
+        if (endboss.energy <= 0 && !this.gameOver && endboss.animationComplete) {
             this.gameOver = true;
             this.win = true;
-        }
-
-        if (this.character.energy <= 0) {
+            this.displayEndScreen();
+        } else if (this.character.energy <= 0 && !this.gameOver) {
             this.gameOver = true;
             this.win = false;
+            this.displayEndScreen();
         }
     }
 
@@ -253,8 +253,8 @@ class World {
      * This function displays the endscreen.
      */
     displayEndScreen() {
-        this.stopAllSounds();
-
+        this.muteAllSounds();
+        
         if (this.win) {
             this.winning_sound.volume = 0.1;
             this.winning_sound.play();
@@ -264,6 +264,35 @@ class World {
             this.gameOver_sound.play();
             this.addToMap(this.gameOverScreen);
         }
+        this.highlightMenuButtons();
+    }
+
+
+    /**
+     * This function highlights the buttons of the menu when endscreen is shown.
+     */
+    highlightMenuButtons() {
+        const buttonsToHighlight = ['homeButton', 'restartButton', 'tutorialButton', 'controlsButton', 'soundButton', 'fullscreenButton'];
+        buttonsToHighlight.forEach(buttonId => {
+            const button = document.getElementById(buttonId);
+            if (button) {
+                button.classList.add('highlighted');
+            }
+        });
+    }
+
+
+    /**
+     * This function removes the highlighting of the buttons of the menu when endscreen is shown.
+     */
+    removeHighlightMenuButtons() {
+        const buttonsToHighlight = ['homeButton', 'restartButton', 'tutorialButton', 'controlsButton', 'soundButton', 'fullscreenButton'];
+        buttonsToHighlight.forEach(buttonId => {
+            const button = document.getElementById(buttonId);
+            if (button) {
+                button.classList.remove('highlighted');
+            }
+        });
     }
 
 

@@ -9,6 +9,7 @@ class Endboss extends MoveableObject {
     characterEnteredBossArea = false;
     distanceToCharacter;
     walkingSoundPlaying = false;
+    animationComplete = false;
 
     offset = {
         top: 60,
@@ -134,6 +135,10 @@ class Endboss extends MoveableObject {
      */
     playDeadAnimation() {
         this.playAnimation(this.IMAGES_DEAD);
+        
+        setTimeout(() => {
+            this.animationComplete = true;
+        }, 2000);        
     }
 
 
